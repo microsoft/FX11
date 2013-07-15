@@ -25,6 +25,10 @@ extern void __cdecl D3DXDebugPrintf(UINT lvl, LPCSTR szFormat, ...);
 #define DPF
 #endif
 
+#pragma warning(push)
+#pragma warning(disable : 4481)
+// VS 2010 considers 'override' to be a extension, but it's part of C++11 as of VS 2012
+
 //////////////////////////////////////////////////////////////////////////
 
 using namespace D3DX11Core;
@@ -103,7 +107,7 @@ union UDataPointer
     float                   *pNumericFloat;
     uint32_t                *pNumericDword;
     int                     *pNumericInt;
-    bool                    *pNumericBool;
+    BOOL                    *pNumericBool;
     SString                 *pString;
     SShaderBlock            *pShader;
     SBaseBlock              *pBlock;
@@ -190,8 +194,8 @@ struct SType : public ID3DX11EffectType
         {
             SVariable   *pMembers;              // array of type instances describing structure members
             uint32_t    Members;
-            bool        ImplementsInterface;    // true if this type implements an interface
-            bool        HasSuperClass;          // true if this type has a parent class
+            BOOL        ImplementsInterface;    // true if this type implements an interface
+            BOOL        HasSuperClass;          // true if this type has a parent class
         }               StructType;
         void*           InterfaceType;          // nothing for interfaces
     };
@@ -262,13 +266,13 @@ struct SType : public ID3DX11EffectType
     uint32_t GetTotalPackedSize(_In_ bool IsSingleElement) const; 
     HRESULT GetDescHelper(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc, _In_ bool IsSingleElement) const;
 
-    STDMETHOD_(bool, IsValid)() { return true; }
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) { return GetDescHelper(pDesc, false); }
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic);
-    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
-    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+    STDMETHOD_(bool, IsValid)() override { return true; }
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) override { return GetDescHelper(pDesc, false); }
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic) override;
+    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index) override;
+    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index) override;
 
     IUNKNOWN_IMP(SType, ID3DX11EffectType, IUnknown);
 };
@@ -280,13 +284,13 @@ struct SSingleElementType : public ID3DX11EffectType
 {
     SType *pType;
 
-    STDMETHOD_(bool, IsValid)() { return true; }
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) { return ((SType*)pType)->GetDescHelper(pDesc, true); }
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(uint32_t Index) { return ((SType*)pType)->GetMemberTypeByIndex(Index); }
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(LPCSTR Name) { return ((SType*)pType)->GetMemberTypeByName(Name); }
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(LPCSTR Semantic) { return ((SType*)pType)->GetMemberTypeBySemantic(Semantic); }
-    STDMETHOD_(LPCSTR, GetMemberName)(uint32_t Index) { return ((SType*)pType)->GetMemberName(Index); }
-    STDMETHOD_(LPCSTR, GetMemberSemantic)(uint32_t Index) { return ((SType*)pType)->GetMemberSemantic(Index); }
+    STDMETHOD_(bool, IsValid)() override { return true; }
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) override { return ((SType*)pType)->GetDescHelper(pDesc, true); }
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(uint32_t Index) override { return ((SType*)pType)->GetMemberTypeByIndex(Index); }
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(LPCSTR Name) override { return ((SType*)pType)->GetMemberTypeByName(Name); }
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(LPCSTR Semantic) override { return ((SType*)pType)->GetMemberTypeBySemantic(Semantic); }
+    STDMETHOD_(LPCSTR, GetMemberName)(uint32_t Index) override { return ((SType*)pType)->GetMemberName(Index); }
+    STDMETHOD_(LPCSTR, GetMemberSemantic)(uint32_t Index) override { return ((SType*)pType)->GetMemberSemantic(Index); }
 
     IUNKNOWN_IMP(SSingleElementType, ID3DX11EffectType, IUnknown);
 };
@@ -356,16 +360,16 @@ struct STechnique : public ID3DX11EffectTechnique
 
     STechnique();
 
-    STDMETHOD_(bool, IsValid)();
-    STDMETHOD(GetDesc)(_Out_ D3DX11_TECHNIQUE_DESC *pDesc);
+    STDMETHOD_(bool, IsValid)() override;
+    STDMETHOD(GetDesc)(_Out_ D3DX11_TECHNIQUE_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectPass*, GetPassByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectPass*, GetPassByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectPass*, GetPassByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectPass*, GetPassByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask);
+    STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask) override;
 
     IUNKNOWN_IMP(STechnique, ID3DX11EffectTechnique, IUnknown);
 };
@@ -385,14 +389,14 @@ struct SGroup : public ID3DX11EffectGroup
 
     SGroup();
 
-    STDMETHOD_(bool, IsValid)();
-    STDMETHOD(GetDesc)(_Out_ D3DX11_GROUP_DESC *pDesc);
+    STDMETHOD_(bool, IsValid)() override;
+    STDMETHOD(GetDesc)(_Out_ D3DX11_GROUP_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name) override;
 
     IUNKNOWN_IMP(SGroup, ID3DX11EffectGroup, IUnknown);
 };
@@ -446,22 +450,22 @@ struct SPassBlock : SBaseBlock, public ID3DX11EffectPass
     template<EObjectType EShaderType>
     HRESULT GetShaderDescHelper(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
 
-    STDMETHOD_(bool, IsValid)();
-    STDMETHOD(GetDesc)(_Out_ D3DX11_PASS_DESC *pDesc);
+    STDMETHOD_(bool, IsValid)() override;
+    STDMETHOD(GetDesc)(_Out_ D3DX11_PASS_DESC *pDesc) override;
 
-    STDMETHOD(GetVertexShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
-    STDMETHOD(GetGeometryShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
-    STDMETHOD(GetPixelShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
-    STDMETHOD(GetHullShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
-    STDMETHOD(GetDomainShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
-    STDMETHOD(GetComputeShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc);
+    STDMETHOD(GetVertexShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
+    STDMETHOD(GetGeometryShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
+    STDMETHOD(GetPixelShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
+    STDMETHOD(GetHullShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
+    STDMETHOD(GetDomainShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
+    STDMETHOD(GetComputeShaderDesc)(_Out_ D3DX11_PASS_SHADER_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD(Apply)(_In_ uint32_t Flags, _In_ ID3D11DeviceContext* pContext);
+    STDMETHOD(Apply)(_In_ uint32_t Flags, _In_ ID3D11DeviceContext* pContext) override;
     
-    STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask);
+    STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask) override;
 
     IUNKNOWN_IMP(SPassBlock, ID3DX11EffectPass, IUnknown);
 };
@@ -610,7 +614,7 @@ struct SShaderBlock
         uint32_t                    BytecodeLength;
         char                        *pStreamOutDecls[4];        // set with ConstructGSWithSO
         uint32_t                    RasterizedStream;           // set with ConstructGSWithSO
-        bool                        IsNullGS;
+        BOOL                        IsNullGS;
         ID3D11ShaderReflection      *pReflection;
         uint32_t                    InterfaceParameterCount;    // set with BindInterfaces (used for function interface parameters)
         SInterfaceParameter         *pInterfaceParameters;      // set with BindInterfaces (used for function interface parameters)
@@ -731,48 +735,48 @@ struct SAnonymousShader : public TUncastableVariable<ID3DX11EffectShaderVariable
     SAnonymousShader(_In_ SShaderBlock *pBlock = nullptr);
 
     // ID3DX11EffectShaderVariable interface
-    STDMETHOD_(bool, IsValid)();
-    STDMETHOD_(ID3DX11EffectType*, GetType)();
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc);
+    STDMETHOD_(bool, IsValid)() override;
+    STDMETHOD_(ID3DX11EffectType*, GetType)() override;
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(_In_z_ LPCSTR Semantic);
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(_In_z_ LPCSTR Semantic) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index);
+    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index) override;
 
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)();
+    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)() override;
 
     // other casts are handled by TUncastableVariable
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)();
+    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)() override;
 
-    STDMETHOD(SetRawValue)(_In_reads_bytes_(Count) const void *pData, _In_ uint32_t Offset, _In_ uint32_t Count);
-    STDMETHOD(GetRawValue)(_Out_writes_bytes_(Count) void *pData, _In_ uint32_t Offset, _In_ uint32_t Count);
+    STDMETHOD(SetRawValue)(_In_reads_bytes_(Count) const void *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
+    STDMETHOD(GetRawValue)(_Out_writes_bytes_(Count) void *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(GetShaderDesc)(_In_ uint32_t ShaderIndex, _Out_ D3DX11_EFFECT_SHADER_DESC *pDesc);
+    STDMETHOD(GetShaderDesc)(_In_ uint32_t ShaderIndex, _Out_ D3DX11_EFFECT_SHADER_DESC *pDesc) override;
 
-    STDMETHOD(GetVertexShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11VertexShader **ppVS);
-    STDMETHOD(GetGeometryShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11GeometryShader **ppGS);
-    STDMETHOD(GetPixelShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11PixelShader **ppPS);
-    STDMETHOD(GetHullShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11HullShader **ppHS);
-    STDMETHOD(GetDomainShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11DomainShader **ppDS);
-    STDMETHOD(GetComputeShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11ComputeShader **ppCS);
+    STDMETHOD(GetVertexShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11VertexShader **ppVS) override;
+    STDMETHOD(GetGeometryShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11GeometryShader **ppGS) override;
+    STDMETHOD(GetPixelShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11PixelShader **ppPS) override;
+    STDMETHOD(GetHullShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11HullShader **ppHS) override;
+    STDMETHOD(GetDomainShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11DomainShader **ppDS) override;
+    STDMETHOD(GetComputeShader)(_In_ uint32_t ShaderIndex, _Outptr_ ID3D11ComputeShader **ppCS) override;
 
-    STDMETHOD(GetInputSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc);
-    STDMETHOD(GetOutputSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc);
-    STDMETHOD(GetPatchConstantSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc);
+    STDMETHOD(GetInputSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc) override;
+    STDMETHOD(GetOutputSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc) override;
+    STDMETHOD(GetPatchConstantSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc) override;
 
     // ID3DX11EffectType interface
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic);
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic) override;
 
-    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
-    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index) override;
+    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index) override;
 
     IUNKNOWN_IMP(SAnonymousShader, ID3DX11EffectShaderVariable, ID3DX11EffectVariable);
 };
@@ -842,43 +846,43 @@ struct SConstantBuffer : public TUncastableVariable<ID3DX11EffectConstantBuffer>
     bool ClonedSingle() const;
 
     // ID3DX11EffectConstantBuffer interface
-    STDMETHOD_(bool, IsValid)();
-    STDMETHOD_(ID3DX11EffectType*, GetType)();
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc);
+    STDMETHOD_(bool, IsValid)() override;
+    STDMETHOD_(ID3DX11EffectType*, GetType)() override;
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(_In_z_ LPCSTR Semantic);
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(_In_z_ LPCSTR Semantic) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index);
+    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index) override;
 
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)();
+    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)() override;
 
     // other casts are handled by TUncastableVariable
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)();
+    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)() override;
 
-    STDMETHOD(SetRawValue)(_In_reads_bytes_(Count) const void *pData, _In_ uint32_t Offset, _In_ uint32_t Count);
-    STDMETHOD(GetRawValue)(_Out_writes_bytes_(Count) void *pData, _In_ uint32_t Offset, _In_ uint32_t Count);
+    STDMETHOD(SetRawValue)(_In_reads_bytes_(Count) const void *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
+    STDMETHOD(GetRawValue)(_Out_writes_bytes_(Count) void *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetConstantBuffer)(_In_ ID3D11Buffer *pConstantBuffer);
-    STDMETHOD(GetConstantBuffer)(_Outptr_ ID3D11Buffer **ppConstantBuffer);
-    STDMETHOD(UndoSetConstantBuffer)();
+    STDMETHOD(SetConstantBuffer)(_In_ ID3D11Buffer *pConstantBuffer) override;
+    STDMETHOD(GetConstantBuffer)(_Outptr_ ID3D11Buffer **ppConstantBuffer) override;
+    STDMETHOD(UndoSetConstantBuffer)() override;
 
-    STDMETHOD(SetTextureBuffer)(_In_ ID3D11ShaderResourceView *pTextureBuffer);
-    STDMETHOD(GetTextureBuffer)(_Outptr_ ID3D11ShaderResourceView **ppTextureBuffer);
-    STDMETHOD(UndoSetTextureBuffer)();
+    STDMETHOD(SetTextureBuffer)(_In_ ID3D11ShaderResourceView *pTextureBuffer) override;
+    STDMETHOD(GetTextureBuffer)(_Outptr_ ID3D11ShaderResourceView **ppTextureBuffer) override;
+    STDMETHOD(UndoSetTextureBuffer)() override;
 
     // ID3DX11EffectType interface
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic);
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic) override;
 
-    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
-    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+    STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index) override;
+    STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index) override;
 
     IUNKNOWN_IMP(SConstantBuffer, ID3DX11EffectConstantBuffer, ID3DX11EffectVariable);
 };
@@ -1216,35 +1220,35 @@ public:
     // Public interface
 
     // IUnknown
-    STDMETHOD(QueryInterface)(REFIID iid, _COM_Outptr_ LPVOID *ppv);
-    STDMETHOD_(ULONG, AddRef)();
-    STDMETHOD_(ULONG, Release)();
+    STDMETHOD(QueryInterface)(REFIID iid, _COM_Outptr_ LPVOID *ppv) override;
+    STDMETHOD_(ULONG, AddRef)() override;
+    STDMETHOD_(ULONG, Release)() override;
 
     // ID3DX11Effect
-    STDMETHOD_(bool, IsValid)() { return true; }
+    STDMETHOD_(bool, IsValid)() override { return true; }
 
-    STDMETHOD(GetDevice)(_Outptr_ ID3D11Device** ppDevice);    
+    STDMETHOD(GetDevice)(_Outptr_ ID3D11Device** ppDevice) override;    
 
-    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_DESC *pDesc);
+    STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_DESC *pDesc) override;
 
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetConstantBufferByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetConstantBufferByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetConstantBufferByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetConstantBufferByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectVariable*, GetVariableByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectVariable*, GetVariableByName)(_In_z_ LPCSTR Name);
-    STDMETHOD_(ID3DX11EffectVariable*, GetVariableBySemantic)(_In_z_ LPCSTR Semantic);
+    STDMETHOD_(ID3DX11EffectVariable*, GetVariableByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetVariableByName)(_In_z_ LPCSTR Name) override;
+    STDMETHOD_(ID3DX11EffectVariable*, GetVariableBySemantic)(_In_z_ LPCSTR Semantic) override;
 
-    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3DX11EffectGroup*, GetGroupByIndex)(_In_ uint32_t Index);
-    STDMETHOD_(ID3DX11EffectGroup*, GetGroupByName)(_In_z_ LPCSTR Name);
+    STDMETHOD_(ID3DX11EffectGroup*, GetGroupByIndex)(_In_ uint32_t Index) override;
+    STDMETHOD_(ID3DX11EffectGroup*, GetGroupByName)(_In_z_ LPCSTR Name) override;
 
-    STDMETHOD_(ID3D11ClassLinkage*, GetClassLinkage)();
+    STDMETHOD_(ID3D11ClassLinkage*, GetClassLinkage)() override;
 
-    STDMETHOD(CloneEffect)(_In_ uint32_t Flags, _Outptr_ ID3DX11Effect** ppClonedEffect);
-    STDMETHOD(Optimize)();
-    STDMETHOD_(bool, IsOptimized)();
+    STDMETHOD(CloneEffect)(_In_ uint32_t Flags, _Outptr_ ID3DX11Effect** ppClonedEffect) override;
+    STDMETHOD(Optimize)() override;
+    STDMETHOD_(bool, IsOptimized)() override;
 
     //////////////////////////////////////////////////////////////////////////    
     // New reflection helpers
@@ -1257,3 +1261,5 @@ public:
 };
 
 }
+
+#pragma warning(pop)

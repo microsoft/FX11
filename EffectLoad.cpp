@@ -1152,7 +1152,6 @@ uint32_t CEffectLoader::UnpackData(uint8_t *pDestData, uint8_t *pSrcData, uint32
             for (size_t j = 0; j < pType->StructType.Members; ++ j)
             {
                 uint32_t  br;
-                assert((UINT_PTR)pType->StructType.pMembers[j].pType == (uint32_t)(UINT_PTR)pType->StructType.pMembers[j].pType);
                 assert(PackedDataSize > bytesRead);                    
 
                 VH( UnpackData(pDestData + pType->StructType.pMembers[j].Data.Offset, 
@@ -1821,7 +1820,7 @@ HRESULT CEffectLoader::LoadAssignments( uint32_t Assignments, SAssignment **ppAs
                 pShaderBlock->pReflectionData->pStreamOutDecls[2] =
                 pShaderBlock->pReflectionData->pStreamOutDecls[3] = nullptr;
                 pShaderBlock->pReflectionData->RasterizedStream = 0;
-                pShaderBlock->pReflectionData->IsNullGS = false;
+                pShaderBlock->pReflectionData->IsNullGS = FALSE;
                 pShaderBlock->pReflectionData->pReflection = nullptr;
                 pShaderBlock->pReflectionData->InterfaceParameterCount = 0;
                 pShaderBlock->pReflectionData->pInterfaceParameters = nullptr;
@@ -2086,7 +2085,7 @@ HRESULT CEffectLoader::LoadObjectVariables()
                     pShaderBlock->pReflectionData->pStreamOutDecls[2] =
                     pShaderBlock->pReflectionData->pStreamOutDecls[3] = nullptr;
                     pShaderBlock->pReflectionData->RasterizedStream = 0;
-                    pShaderBlock->pReflectionData->IsNullGS = false;
+                    pShaderBlock->pReflectionData->IsNullGS = FALSE;
                     pShaderBlock->pReflectionData->pReflection = nullptr;
                     pShaderBlock->pReflectionData->InterfaceParameterCount = 0;
                     pShaderBlock->pReflectionData->pInterfaceParameters = nullptr;

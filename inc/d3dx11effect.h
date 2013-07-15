@@ -15,7 +15,7 @@
 
 #pragma once
 
-#define D3DX11_EFFECTS_VERSION 1105
+#define D3DX11_EFFECTS_VERSION 1106
 
 #include <d3d11.h>
 #include <d3d11shader.h>
@@ -234,9 +234,6 @@ DEFINE_GUID(IID_ID3DX11EffectType,
 DECLARE_INTERFACE_(ID3DX11EffectType, IUnknown)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
 
     // ID3DX11EffectType
     STDMETHOD_(bool, IsValid)(THIS) PURE;
@@ -310,9 +307,6 @@ typedef interface ID3DX11EffectSamplerVariable ID3DX11EffectSamplerVariable;
 DECLARE_INTERFACE_(ID3DX11EffectVariable, IUnknown)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
 
     // ID3DX11EffectVariable
     STDMETHOD_(bool, IsValid)(THIS) PURE;
@@ -368,46 +362,8 @@ DEFINE_GUID(IID_ID3DX11EffectScalarVariable,
 DECLARE_INTERFACE_(ID3DX11EffectScalarVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectScalarVariable
     STDMETHOD(SetFloat)(THIS_ _In_ const float Value) PURE;
     STDMETHOD(GetFloat)(THIS_ _Out_ float *pValue) PURE;    
@@ -445,46 +401,8 @@ DEFINE_GUID(IID_ID3DX11EffectVectorVariable,
 DECLARE_INTERFACE_(ID3DX11EffectVectorVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE; 
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectVectorVariable
     STDMETHOD(SetBoolVector) (THIS_ _In_reads_(4) const bool *pData) PURE;
     STDMETHOD(SetIntVector)  (THIS_ _In_reads_(4) const int *pData) PURE;
@@ -520,45 +438,7 @@ DEFINE_GUID(IID_ID3DX11EffectMatrixVariable,
 DECLARE_INTERFACE_(ID3DX11EffectMatrixVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectMatrixVariable
     STDMETHOD(SetMatrix)(THIS_ _In_reads_(16) const float *pData) PURE;
@@ -567,11 +447,17 @@ DECLARE_INTERFACE_(ID3DX11EffectMatrixVariable, ID3DX11EffectVariable)
     STDMETHOD(SetMatrixArray)(THIS_ _In_reads_(Count*16) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     STDMETHOD(GetMatrixArray)(THIS_ _Out_writes_(Count*16) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     
+    STDMETHOD(SetMatrixPointerArray)(_In_reads_(Count*16) const float **ppData, uint32_t Offset, uint32_t Count) PURE;
+    STDMETHOD(GetMatrixPointerArray)(_Out_writes_(Count*16) float **ppData, uint32_t Offset, uint32_t Count)  PURE;
+
     STDMETHOD(SetMatrixTranspose)(THIS_ _In_reads_(16) const float *pData) PURE;
     STDMETHOD(GetMatrixTranspose)(THIS_ _Out_writes_(16) float *pData) PURE;
     
     STDMETHOD(SetMatrixTransposeArray)(THIS_ _In_reads_(Count*16) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     STDMETHOD(GetMatrixTransposeArray)(THIS_ _Out_writes_(Count*16) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
+
+    STDMETHOD(SetMatrixTransposePointerArray)(_In_reads_(Count*16) const float **ppData, uint32_t Offset, uint32_t Count)  PURE;
+    STDMETHOD(GetMatrixTransposePointerArray)(_Out_writes_(Count*16) float **ppData, uint32_t Offset, uint32_t Count)  PURE;
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -591,45 +477,7 @@ DEFINE_GUID(IID_ID3DX11EffectStringVariable,
 DECLARE_INTERFACE_(ID3DX11EffectStringVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectStringVariable
     STDMETHOD(GetString)(THIS_ _Outptr_result_z_ LPCSTR *ppString) PURE;
@@ -653,44 +501,7 @@ DEFINE_GUID(IID_ID3DX11EffectClassInstanceVariable,
 DECLARE_INTERFACE_(ID3DX11EffectClassInstanceVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectClassInstanceVariable
     STDMETHOD(GetClassInstance)(_Outptr_ ID3D11ClassInstance** ppClassInstance) PURE;
@@ -713,44 +524,7 @@ DEFINE_GUID(IID_ID3DX11EffectInterfaceVariable,
 DECLARE_INTERFACE_(ID3DX11EffectInterfaceVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectInterfaceVariable
     STDMETHOD(SetClassInstance)(_In_ ID3DX11EffectClassInstanceVariable *pEffectClassInstance) PURE;
@@ -774,45 +548,7 @@ DEFINE_GUID(IID_ID3DX11EffectShaderResourceVariable,
 DECLARE_INTERFACE_(ID3DX11EffectShaderResourceVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectShaderResourceVariable
     STDMETHOD(SetResource)(THIS_ _In_ ID3D11ShaderResourceView *pResource) PURE;
@@ -839,45 +575,7 @@ DEFINE_GUID(IID_ID3DX11EffectUnorderedAccessViewVariable,
 DECLARE_INTERFACE_(ID3DX11EffectUnorderedAccessViewVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectUnorderedAccessViewVariable
     STDMETHOD(SetUnorderedAccessView)(THIS_ _In_ ID3D11UnorderedAccessView *pResource) PURE;
@@ -904,45 +602,7 @@ DEFINE_GUID(IID_ID3DX11EffectRenderTargetViewVariable,
 DECLARE_INTERFACE_(ID3DX11EffectRenderTargetViewVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectRenderTargetViewVariable
     STDMETHOD(SetRenderTarget)(THIS_ _In_ ID3D11RenderTargetView *pResource) PURE;
@@ -969,46 +629,8 @@ DEFINE_GUID(IID_ID3DX11EffectDepthStencilViewVariable,
 DECLARE_INTERFACE_(ID3DX11EffectDepthStencilViewVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectDepthStencilViewVariable
     STDMETHOD(SetDepthStencil)(THIS_ _In_ ID3D11DepthStencilView *pResource) PURE;
     STDMETHOD(GetDepthStencil)(THIS_ _Outptr_ ID3D11DepthStencilView **ppResource) PURE;
@@ -1034,45 +656,7 @@ DEFINE_GUID(IID_ID3DX11EffectConstantBuffer,
 DECLARE_INTERFACE_(ID3DX11EffectConstantBuffer, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectConstantBuffer
     STDMETHOD(SetConstantBuffer)(THIS_ _In_ ID3D11Buffer *pConstantBuffer) PURE;
@@ -1129,45 +713,7 @@ DEFINE_GUID(IID_ID3DX11EffectShaderVariable,
 DECLARE_INTERFACE_(ID3DX11EffectShaderVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-        
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
 
     // ID3DX11EffectShaderVariable
     STDMETHOD(GetShaderDesc)(THIS_ _In_ uint32_t ShaderIndex, _Out_ D3DX11_EFFECT_SHADER_DESC *pDesc) PURE;
@@ -1201,46 +747,8 @@ DEFINE_GUID(IID_ID3DX11EffectBlendVariable,
 DECLARE_INTERFACE_(ID3DX11EffectBlendVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectBlendVariable
     STDMETHOD(GetBlendState)(THIS_ _In_ uint32_t Index, _Outptr_ ID3D11BlendState **ppState) PURE;
     STDMETHOD(SetBlendState)(THIS_ _In_ uint32_t Index, _In_ ID3D11BlendState *pState) PURE;
@@ -1265,46 +773,8 @@ DEFINE_GUID(IID_ID3DX11EffectDepthStencilVariable,
 DECLARE_INTERFACE_(ID3DX11EffectDepthStencilVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectDepthStencilVariable
     STDMETHOD(GetDepthStencilState)(THIS_ _In_ uint32_t Index, _Outptr_ ID3D11DepthStencilState **ppState) PURE;
     STDMETHOD(SetDepthStencilState)(THIS_ _In_ uint32_t Index, _In_ ID3D11DepthStencilState *pState) PURE;
@@ -1329,46 +799,8 @@ DEFINE_GUID(IID_ID3DX11EffectRasterizerVariable,
 DECLARE_INTERFACE_(ID3DX11EffectRasterizerVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectRasterizerVariable
     STDMETHOD(GetRasterizerState)(THIS_ _In_ uint32_t Index, _Outptr_ ID3D11RasterizerState **ppState) PURE;
     STDMETHOD(SetRasterizerState)(THIS_ _In_ uint32_t Index, _In_ ID3D11RasterizerState *pState) PURE;
@@ -1393,46 +825,8 @@ DEFINE_GUID(IID_ID3DX11EffectSamplerVariable,
 DECLARE_INTERFACE_(ID3DX11EffectSamplerVariable, ID3DX11EffectVariable)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
     // ID3DX11EffectVariable
-    STDMETHOD_(bool, IsValid)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectType*, GetType)(THIS) PURE;
-    STDMETHOD(GetDesc)(THIS_ _Out_ D3DX11_EFFECT_VARIABLE_DESC *pDesc) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByIndex)(THIS_ _In_ uint32_t Index) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(THIS_ _In_z_ LPCSTR Name) PURE;
-    STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(THIS_ _In_z_ LPCSTR Semantic) PURE;
-    
-    STDMETHOD_(ID3DX11EffectVariable*, GetElement)(THIS_ _In_ uint32_t Index) PURE;
-    
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, GetParentConstantBuffer)(THIS) PURE;
-    
-    STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectVectorVariable*, AsVector)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectMatrixVariable*, AsMatrix)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectStringVariable*, AsString)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectClassInstanceVariable*, AsClassInstance)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectInterfaceVariable*, AsInterface)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderResourceVariable*, AsShaderResource)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectUnorderedAccessViewVariable*, AsUnorderedAccessView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRenderTargetViewVariable*, AsRenderTargetView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilViewVariable*, AsDepthStencilView)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectConstantBuffer*, AsConstantBuffer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectShaderVariable*, AsShader)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectBlendVariable*, AsBlend)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectDepthStencilVariable*, AsDepthStencil)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectRasterizerVariable*, AsRasterizer)(THIS) PURE;
-    STDMETHOD_(ID3DX11EffectSamplerVariable*, AsSampler)(THIS) PURE;
-    
-    STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) const void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, _In_ uint32_t ByteOffset, _In_ uint32_t ByteCount) PURE;
-    
+
     // ID3DX11EffectSamplerVariable
     STDMETHOD(GetSampler)(THIS_ _In_ uint32_t Index, _Outptr_ ID3D11SamplerState **ppSampler) PURE;
     STDMETHOD(SetSampler)(THIS_ _In_ uint32_t Index, _In_ ID3D11SamplerState *pSampler) PURE;
@@ -1500,9 +894,6 @@ DEFINE_GUID(IID_ID3DX11EffectPass,
 DECLARE_INTERFACE_(ID3DX11EffectPass, IUnknown)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
 
     // ID3DX11EffectPass
     STDMETHOD_(bool, IsValid)(THIS) PURE;
@@ -1553,9 +944,6 @@ DEFINE_GUID(IID_ID3DX11EffectTechnique,
 DECLARE_INTERFACE_(ID3DX11EffectTechnique, IUnknown)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
 
     // ID3DX11EffectTechnique
     STDMETHOD_(bool, IsValid)(THIS) PURE;
@@ -1600,9 +988,6 @@ DEFINE_GUID(IID_ID3DX11EffectGroup,
 DECLARE_INTERFACE_(ID3DX11EffectGroup, IUnknown) 
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
 
     // ID3DX11EffectGroup
     STDMETHOD_(bool, IsValid)(THIS) PURE;
@@ -1647,10 +1032,7 @@ DEFINE_GUID(IID_ID3DX11Effect,
 DECLARE_INTERFACE_(ID3DX11Effect, IUnknown)
 {
     // IUnknown
-    STDMETHOD(QueryInterface)(THIS_ REFIID iid, _COM_Outptr_ LPVOID *ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-    
+
     // ID3DX11Effect
     STDMETHOD_(bool, IsValid)(THIS) PURE;
 
@@ -1833,4 +1215,3 @@ HRESULT D3DX11CompileEffectFromFile( _In_z_ LPCWSTR pFileName,
 #ifdef __cplusplus
 }
 #endif //__cplusplus
-
