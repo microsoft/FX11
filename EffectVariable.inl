@@ -14,6 +14,9 @@
 // http://go.microsoft.com/fwlink/p/?LinkId=271568
 //--------------------------------------------------------------------------------------
 
+#pragma warning(push)
+#pragma warning(disable : 4127)
+
 //////////////////////////////////////////////////////////////////////////
 // Invalid variable forward defines
 //////////////////////////////////////////////////////////////////////////
@@ -4825,4 +4828,4 @@ struct SMember : public TVariable<TMember<ID3DX11EffectVariable> >
 HRESULT PlacementNewVariable(_In_ void *pVar, _In_ SType *pType, _In_ bool IsAnnotation);
 SMember * CreateNewMember(_In_ SType *pType, _In_ bool IsAnnotation);
 
-
+#pragma warning(pop)

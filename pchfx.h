@@ -15,7 +15,7 @@
 
 #pragma once
 
-#pragma warning(disable : 4127 4201 4505 4616 4706 6326 )
+#pragma warning(disable : 4102 4127 4201 4505 4616 4706 6326)
 
 #ifndef NOMINMAX
 #define NOMINMAX
