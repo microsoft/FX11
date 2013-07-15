@@ -370,6 +370,7 @@
       <ClCompile Include="EffectReflection.cpp" />
       <ClCompile Include="EffectRuntime.cpp" />
       <None Include="EffectVariable.inl" />
+      <CLInclude Include="IUnknownImp.h" />
   </ItemGroup>
 <ItemGroup></ItemGroup>
 <ItemGroup></ItemGroup>

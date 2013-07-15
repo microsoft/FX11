@@ -10,6 +10,8 @@
 // PARTICULAR PURPOSE.
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// http://go.microsoft.com/fwlink/p/?LinkId=271568
 //--------------------------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////
@@ -76,6 +78,7 @@ struct SEffectInvalidType : public ID3DX11EffectType
     STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic) { UNREFERENCED_PARAMETER(Semantic); return &g_InvalidType; }
     STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return nullptr; }
     STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return nullptr; }
+    IUNKNOWN_IMP(SEffectInvalidType, ID3DX11EffectType, IUnknown);
 };
 
 template<typename IBaseInterface>
@@ -147,6 +150,8 @@ public:
         { UNREFERENCED_PARAMETER(pData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetBoolArray)(_Out_writes_(Count) bool *pData, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(pData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidScalarVariable, ID3DX11EffectScalarVariable, ID3DX11EffectVariable);
 };
 
 
@@ -175,6 +180,7 @@ public:
     STDMETHOD(GetFloatVectorArray)(_Out_writes_(4*Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(pData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; };
 
+    IUNKNOWN_IMP(SEffectInvalidVectorVariable, ID3DX11EffectVectorVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidMatrixVariable : public TEffectInvalidVariable<ID3DX11EffectMatrixVariable>
@@ -206,6 +212,8 @@ public:
         { UNREFERENCED_PARAMETER(ppData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetMatrixTransposePointerArray)(_Out_writes_(16*Count) float **ppData, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidMatrixVariable, ID3DX11EffectMatrixVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidStringVariable : public TEffectInvalidVariable<ID3DX11EffectStringVariable>
@@ -215,6 +223,8 @@ public:
     STDMETHOD(GetString)(_Outptr_result_z_ LPCSTR *ppString) { UNREFERENCED_PARAMETER(ppString); return E_FAIL; }
     STDMETHOD(GetStringArray)(_Out_writes_(Count) LPCSTR *ppStrings, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppStrings); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidStringVariable, ID3DX11EffectStringVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidClassInstanceVariable : public TEffectInvalidVariable<ID3DX11EffectClassInstanceVariable>
@@ -222,6 +232,8 @@ struct SEffectInvalidClassInstanceVariable : public TEffectInvalidVariable<ID3DX
 public:
 
     STDMETHOD(GetClassInstance)(_Outptr_ ID3D11ClassInstance **ppClassInstance) { UNREFERENCED_PARAMETER(ppClassInstance); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidClassInstanceVariable, ID3DX11EffectClassInstanceVariable, ID3DX11EffectVariable);
 };
 
 
@@ -233,6 +245,8 @@ public:
         { UNREFERENCED_PARAMETER(pEffectClassInstance); return E_FAIL; }
     STDMETHOD(GetClassInstance)(_Outptr_ ID3DX11EffectClassInstanceVariable **ppEffectClassInstance)
         { UNREFERENCED_PARAMETER(ppEffectClassInstance); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidInterfaceVariable, ID3DX11EffectInterfaceVariable, ID3DX11EffectVariable);
 };
 
 
@@ -247,6 +261,8 @@ public:
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetResourceArray)(_Out_writes_(Count) ID3D11ShaderResourceView **ppResources, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidShaderResourceVariable, ID3DX11EffectShaderResourceVariable, ID3DX11EffectVariable);
 };
 
 
@@ -261,6 +277,8 @@ public:
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetUnorderedAccessViewArray)(_Out_writes_(Count) ID3D11UnorderedAccessView **ppResources, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidUnorderedAccessViewVariable, ID3DX11EffectUnorderedAccessViewVariable, ID3DX11EffectVariable);
 };
 
 
@@ -275,6 +293,8 @@ public:
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetRenderTargetArray)(_Out_writes_(Count) ID3D11RenderTargetView **ppResources, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidRenderTargetViewVariable, ID3DX11EffectRenderTargetViewVariable, ID3DX11EffectVariable);
 };
 
 
@@ -289,6 +309,8 @@ public:
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
     STDMETHOD(GetDepthStencilArray)(_Out_writes_(Count) ID3D11DepthStencilView **ppResources, _In_ uint32_t Offset, _In_ uint32_t Count)
         { UNREFERENCED_PARAMETER(ppResources); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidDepthStencilViewVariable, ID3DX11EffectDepthStencilViewVariable, ID3DX11EffectVariable);
 };
 
 
@@ -303,6 +325,8 @@ public:
     STDMETHOD(SetTextureBuffer)(_In_ ID3D11ShaderResourceView *pTextureBuffer) { UNREFERENCED_PARAMETER(pTextureBuffer); return E_FAIL; }
     STDMETHOD(GetTextureBuffer)(_Outptr_ ID3D11ShaderResourceView **ppTextureBuffer) { UNREFERENCED_PARAMETER(ppTextureBuffer); return E_FAIL; }
     STDMETHOD(UndoSetTextureBuffer)() { return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidConstantBuffer, ID3DX11EffectConstantBuffer, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidShaderVariable : public TEffectInvalidVariable<ID3DX11EffectShaderVariable>
@@ -331,6 +355,8 @@ public:
         { UNREFERENCED_PARAMETER(ShaderIndex); UNREFERENCED_PARAMETER(Element); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
     STDMETHOD(GetPatchConstantSignatureElementDesc)(_In_ uint32_t ShaderIndex, _In_ uint32_t Element, _Out_ D3D11_SIGNATURE_PARAMETER_DESC *pDesc)
         { UNREFERENCED_PARAMETER(ShaderIndex); UNREFERENCED_PARAMETER(Element); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidShaderVariable, ID3DX11EffectShaderVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidBlendVariable : public TEffectInvalidVariable<ID3DX11EffectBlendVariable>
@@ -344,6 +370,8 @@ public:
     STDMETHOD(UndoSetBlendState)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return E_FAIL; }
     STDMETHOD(GetBackingStore)(_In_ uint32_t Index, _Out_ D3D11_BLEND_DESC *pDesc)
         { UNREFERENCED_PARAMETER(Index); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidBlendVariable, ID3DX11EffectBlendVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidDepthStencilVariable : public TEffectInvalidVariable<ID3DX11EffectDepthStencilVariable>
@@ -357,6 +385,8 @@ public:
     STDMETHOD(UndoSetDepthStencilState)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return E_FAIL; }
     STDMETHOD(GetBackingStore)(_In_ uint32_t Index, _Out_ D3D11_DEPTH_STENCIL_DESC *pDesc)
         { UNREFERENCED_PARAMETER(Index); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidDepthStencilVariable, ID3DX11EffectDepthStencilVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidRasterizerVariable : public TEffectInvalidVariable<ID3DX11EffectRasterizerVariable>
@@ -370,6 +400,8 @@ public:
     STDMETHOD(UndoSetRasterizerState)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return E_FAIL; }
     STDMETHOD(GetBackingStore)(_In_ uint32_t Index, _Out_ D3D11_RASTERIZER_DESC *pDesc)
         { UNREFERENCED_PARAMETER(Index); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidRasterizerVariable, ID3DX11EffectRasterizerVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidSamplerVariable : public TEffectInvalidVariable<ID3DX11EffectSamplerVariable>
@@ -383,6 +415,8 @@ public:
     STDMETHOD(UndoSetSampler)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return E_FAIL; }
     STDMETHOD(GetBackingStore)(_In_ uint32_t Index, _Out_ D3D11_SAMPLER_DESC *pDesc)
         { UNREFERENCED_PARAMETER(Index); UNREFERENCED_PARAMETER(pDesc); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidSamplerVariable, ID3DX11EffectSamplerVariable, ID3DX11EffectVariable);
 };
 
 struct SEffectInvalidPass : public ID3DX11EffectPass
@@ -404,6 +438,8 @@ public:
     STDMETHOD(Apply)(_In_ uint32_t Flags, _In_ ID3D11DeviceContext* pContext)
         { UNREFERENCED_PARAMETER(Flags); UNREFERENCED_PARAMETER(pContext); return E_FAIL; }
     STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask) { UNREFERENCED_PARAMETER(pStateBlockMask); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidPass, ID3DX11EffectPass, IUnknown);
 };
 
 struct SEffectInvalidTechnique : public ID3DX11EffectTechnique
@@ -419,6 +455,8 @@ public:
     STDMETHOD_(ID3DX11EffectPass*, GetPassByName)(_In_z_ LPCSTR Name) { UNREFERENCED_PARAMETER(Name); return &g_InvalidPass; }
 
     STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask) { UNREFERENCED_PARAMETER(pStateBlockMask); return E_FAIL; }
+
+    IUNKNOWN_IMP(SEffectInvalidTechnique, ID3DX11EffectTechnique, IUnknown);
 };
 
 struct SEffectInvalidGroup : public ID3DX11EffectGroup
@@ -432,6 +470,8 @@ public:
 
     STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index) { UNREFERENCED_PARAMETER(Index); return &g_InvalidTechnique; }
     STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name) { UNREFERENCED_PARAMETER(Name); return &g_InvalidTechnique; }
+
+    IUNKNOWN_IMP(SEffectInvalidGroup, ID3DX11EffectGroup, IUnknown);
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -4711,20 +4751,20 @@ ID3DX11EffectSamplerVariable * TUncastableVariable<IBaseInterface>::AsSampler()
 
 // generates a global variable, annotation, global variable member, and annotation member of each struct type
 #define GenerateReflectionClasses(Type, BaseInterface) \
-struct S##Type##GlobalVariable : public T##Type##Variable<TGlobalVariable<BaseInterface>, false> { }; \
-struct S##Type##Annotation : public T##Type##Variable<TAnnotation<BaseInterface>, true> { }; \
-struct S##Type##GlobalVariableMember : public T##Type##Variable<TVariable<TMember<BaseInterface> >, false> { }; \
-struct S##Type##AnnotationMember : public T##Type##Variable<TVariable<TMember<BaseInterface> >, true> { };
+struct S##Type##GlobalVariable : public T##Type##Variable<TGlobalVariable<BaseInterface>, false> { IUNKNOWN_IMP(S##Type##GlobalVariable, BaseInterface, ID3DX11EffectVariable); }; \
+struct S##Type##Annotation : public T##Type##Variable<TAnnotation<BaseInterface>, true> { IUNKNOWN_IMP(S##Type##Annotation, BaseInterface, ID3DX11EffectVariable);}; \
+struct S##Type##GlobalVariableMember : public T##Type##Variable<TVariable<TMember<BaseInterface> >, false> { IUNKNOWN_IMP(S##Type##GlobalVariableMember, BaseInterface, ID3DX11EffectVariable); }; \
+struct S##Type##AnnotationMember : public T##Type##Variable<TVariable<TMember<BaseInterface> >, true> { IUNKNOWN_IMP(S##Type##AnnotationMember, BaseInterface, ID3DX11EffectVariable); };
 
 #define GenerateVectorReflectionClasses(Type, BaseType, BaseInterface) \
-struct S##Type##GlobalVariable : public TVectorVariable<TGlobalVariable<BaseInterface>, false, BaseType> { }; \
-struct S##Type##Annotation : public TVectorVariable<TAnnotation<BaseInterface>, true, BaseType> { }; \
-struct S##Type##GlobalVariableMember : public TVectorVariable<TVariable<TMember<BaseInterface> >, false, BaseType> { }; \
-struct S##Type##AnnotationMember : public TVectorVariable<TVariable<TMember<BaseInterface> >, true, BaseType> { };
+struct S##Type##GlobalVariable : public TVectorVariable<TGlobalVariable<BaseInterface>, false, BaseType> { IUNKNOWN_IMP(S##Type##GlobalVariable, BaseInterface, ID3DX11EffectVariable); }; \
+struct S##Type##Annotation : public TVectorVariable<TAnnotation<BaseInterface>, true, BaseType> { IUNKNOWN_IMP(S##Type##Annotation, BaseInterface, ID3DX11EffectVariable);}; \
+struct S##Type##GlobalVariableMember : public TVectorVariable<TVariable<TMember<BaseInterface> >, false, BaseType> { IUNKNOWN_IMP(S##Type##GlobalVariableMember, BaseInterface, ID3DX11EffectVariable);}; \
+struct S##Type##AnnotationMember : public TVectorVariable<TVariable<TMember<BaseInterface> >, true, BaseType> { IUNKNOWN_IMP(S##Type##AnnotationMember, BaseInterface, ID3DX11EffectVariable);};
 
 #define GenerateReflectionGlobalOnlyClasses(Type) \
-struct S##Type##GlobalVariable : public T##Type##Variable<TGlobalVariable<ID3DX11Effect##Type##Variable> > { }; \
-struct S##Type##GlobalVariableMember : public T##Type##Variable<TVariable<TMember<ID3DX11Effect##Type##Variable> > > { }; \
+struct S##Type##GlobalVariable : public T##Type##Variable<TGlobalVariable<ID3DX11Effect##Type##Variable> > { IUNKNOWN_IMP(S##Type##GlobalVariable, ID3DX11Effect##Type##Variable, ID3DX11EffectVariable); }; \
+struct S##Type##GlobalVariableMember : public T##Type##Variable<TVariable<TMember<ID3DX11Effect##Type##Variable> > > { IUNKNOWN_IMP(S##Type##GlobalVariableMember, ID3DX11Effect##Type##Variable, ID3DX11EffectVariable); }; \
 
 GenerateReflectionClasses(Numeric, ID3DX11EffectVariable);
 GenerateReflectionClasses(FloatScalar, ID3DX11EffectScalarVariable);
@@ -4748,15 +4788,15 @@ GenerateReflectionGlobalOnlyClasses(Rasterizer);
 GenerateReflectionGlobalOnlyClasses(Sampler);
 
 // Optimized matrix classes
-struct SMatrix4x4ColumnMajorGlobalVariable : public TMatrix4x4Variable<TGlobalVariable<ID3DX11EffectMatrixVariable>, true> { };
-struct SMatrix4x4RowMajorGlobalVariable : public TMatrix4x4Variable<TGlobalVariable<ID3DX11EffectMatrixVariable>, false> { };
+struct SMatrix4x4ColumnMajorGlobalVariable : public TMatrix4x4Variable<TGlobalVariable<ID3DX11EffectMatrixVariable>, true> { IUNKNOWN_IMP(SMatrix4x4ColumnMajorGlobalVariable, ID3DX11EffectMatrixVariable, ID3DX11EffectVariable); };
+struct SMatrix4x4RowMajorGlobalVariable : public TMatrix4x4Variable<TGlobalVariable<ID3DX11EffectMatrixVariable>, false> { IUNKNOWN_IMP(SMatrix4x4RowMajorGlobalVariable, ID3DX11EffectMatrixVariable, ID3DX11EffectVariable); };
 
-struct SMatrix4x4ColumnMajorGlobalVariableMember : public TMatrix4x4Variable<TVariable<TMember<ID3DX11EffectMatrixVariable> >, true> { };
-struct SMatrix4x4RowMajorGlobalVariableMember : public TMatrix4x4Variable<TVariable<TMember<ID3DX11EffectMatrixVariable> >, false> { };
+struct SMatrix4x4ColumnMajorGlobalVariableMember : public TMatrix4x4Variable<TVariable<TMember<ID3DX11EffectMatrixVariable> >, true> { IUNKNOWN_IMP(SMatrix4x4ColumnMajorGlobalVariableMember, ID3DX11EffectMatrixVariable, ID3DX11EffectVariable); };
+struct SMatrix4x4RowMajorGlobalVariableMember : public TMatrix4x4Variable<TVariable<TMember<ID3DX11EffectMatrixVariable> >, false> { IUNKNOWN_IMP(SMatrix4x4RowMajorGlobalVariableMember, ID3DX11EffectMatrixVariable, ID3DX11EffectVariable); };
 
 // Optimized vector classes
-struct SFloatVector4GlobalVariable : public TVector4Variable<TGlobalVariable<ID3DX11EffectVectorVariable> > { };
-struct SFloatVector4GlobalVariableMember : public TVector4Variable<TVariable<TMember<ID3DX11EffectVectorVariable> > > { };
+struct SFloatVector4GlobalVariable : public TVector4Variable<TGlobalVariable<ID3DX11EffectVectorVariable> > { IUNKNOWN_IMP(SFloatVector4GlobalVariable, ID3DX11EffectVectorVariable, ID3DX11EffectVariable); };
+struct SFloatVector4GlobalVariableMember : public TVector4Variable<TVariable<TMember<ID3DX11EffectVectorVariable> > > { IUNKNOWN_IMP(SFloatVector4GlobalVariableMember, ID3DX11EffectVectorVariable, ID3DX11EffectVariable); };
 
 // These 3 classes should never be used directly
 

@@ -9,11 +9,14 @@
 // PARTICULAR PURPOSE.
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// http://go.microsoft.com/fwlink/p/?LinkId=271568
 //--------------------------------------------------------------------------------------
 
 #pragma once
 
 #include "EffectBinaryFormat.h"
+#include "IUnknownImp.h"
 
 #ifdef _DEBUG
 extern void __cdecl D3DXDebugPrintf(UINT lvl, LPCSTR szFormat, ...);
@@ -266,6 +269,8 @@ struct SType : public ID3DX11EffectType
     STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(_In_z_ LPCSTR Semantic);
     STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
     STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+
+    IUNKNOWN_IMP(SType, ID3DX11EffectType, IUnknown);
 };
 
 // Represents a type structure for a single element.
@@ -282,6 +287,8 @@ struct SSingleElementType : public ID3DX11EffectType
     STDMETHOD_(ID3DX11EffectType*, GetMemberTypeBySemantic)(LPCSTR Semantic) { return ((SType*)pType)->GetMemberTypeBySemantic(Semantic); }
     STDMETHOD_(LPCSTR, GetMemberName)(uint32_t Index) { return ((SType*)pType)->GetMemberName(Index); }
     STDMETHOD_(LPCSTR, GetMemberSemantic)(uint32_t Index) { return ((SType*)pType)->GetMemberSemantic(Index); }
+
+    IUNKNOWN_IMP(SSingleElementType, ID3DX11EffectType, IUnknown);
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -359,6 +366,8 @@ struct STechnique : public ID3DX11EffectTechnique
     STDMETHOD_(ID3DX11EffectPass*, GetPassByName)(_In_z_ LPCSTR Name);
 
     STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask);
+
+    IUNKNOWN_IMP(STechnique, ID3DX11EffectTechnique, IUnknown);
 };
 
 struct SGroup : public ID3DX11EffectGroup
@@ -384,6 +393,8 @@ struct SGroup : public ID3DX11EffectGroup
 
     STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByIndex)(_In_ uint32_t Index);
     STDMETHOD_(ID3DX11EffectTechnique*, GetTechniqueByName)(_In_z_ LPCSTR Name);
+
+    IUNKNOWN_IMP(SGroup, ID3DX11EffectGroup, IUnknown);
 };
 
 struct SPassBlock : SBaseBlock, public ID3DX11EffectPass
@@ -451,6 +462,8 @@ struct SPassBlock : SBaseBlock, public ID3DX11EffectPass
     STDMETHOD(Apply)(_In_ uint32_t Flags, _In_ ID3D11DeviceContext* pContext);
     
     STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask);
+
+    IUNKNOWN_IMP(SPassBlock, ID3DX11EffectPass, IUnknown);
 };
 
 struct SDepthStencilBlock : SBaseBlock
@@ -760,6 +773,8 @@ struct SAnonymousShader : public TUncastableVariable<ID3DX11EffectShaderVariable
 
     STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
     STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+
+    IUNKNOWN_IMP(SAnonymousShader, ID3DX11EffectShaderVariable, ID3DX11EffectVariable);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -864,6 +879,8 @@ struct SConstantBuffer : public TUncastableVariable<ID3DX11EffectConstantBuffer>
 
     STDMETHOD_(LPCSTR, GetMemberName)(_In_ uint32_t Index);
     STDMETHOD_(LPCSTR, GetMemberSemantic)(_In_ uint32_t Index);
+
+    IUNKNOWN_IMP(SConstantBuffer, ID3DX11EffectConstantBuffer, ID3DX11EffectVariable);
 };
 
 
@@ -1203,6 +1220,7 @@ public:
     STDMETHOD_(ULONG, AddRef)();
     STDMETHOD_(ULONG, Release)();
 
+    // ID3DX11Effect
     STDMETHOD_(bool, IsValid)() { return true; }
 
     STDMETHOD(GetDevice)(_Outptr_ ID3D11Device** ppDevice);    
