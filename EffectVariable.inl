@@ -745,6 +745,8 @@ lExit:
     return hr;
 }
 
+#pragma warning(push)
+#pragma warning( disable : 6103 )
 template<ETemplateVarType SourceType, ETemplateVarType DestType, typename SRC_TYPE, typename DEST_TYPE>
 inline HRESULT SetScalarArray(_In_reads_(Count) const SRC_TYPE *pSrcValues, _Out_writes_(Count) DEST_TYPE *pDestValues,
                               _In_ uint32_t Offset, _In_ uint32_t Count, 
@@ -777,6 +779,7 @@ inline HRESULT SetScalarArray(_In_reads_(Count) const SRC_TYPE *pSrcValues, _Out
 lExit:
     return hr;
 }
+#pragma warning(pop)
 
 template<ETemplateVarType SourceType, ETemplateVarType DestType, typename SRC_TYPE, typename DEST_TYPE>
 inline HRESULT GetScalarArray(_In_reads_(Count) SRC_TYPE *pSrcValues, _Out_writes_(Count) DEST_TYPE *pDestValues,
@@ -2953,7 +2956,9 @@ inline static void Matrix4x4Copy(_In_reads_bytes_(64) const void *pSrc, _Out_wri
 #pragma warning (disable : 6101)
 template<bool IsColumnMajor, bool Transpose, bool IsSetting>
 inline HRESULT DoMatrix4x4ArrayInternal(_In_ uint8_t *pEffectData,
-                                        _Out_writes_bytes_(64*Count) void *pMatrixData,
+                                        _When_(IsSetting, _In_reads_bytes_(64 * Count))
+                                        _When_(!IsSetting, _Out_writes_bytes_(64 * Count))
+                                        void *pMatrixData,
                                         _In_ uint32_t Offset, _In_ uint32_t Count
 #ifdef _DEBUG
                                         , _In_ const SType *pType, _In_ uint32_t  TotalUnpackedSize, _In_z_ LPCSTR pFuncName
@@ -4087,7 +4092,7 @@ HRESULT TShaderVariable<IBaseInterface>::GetShaderDesc(uint32_t ShaderIndex, D3D
 
     CHECK_OBJECT_SCALAR_BOUNDS(ShaderIndex, pDesc);
 
-    Data.pShader[ShaderIndex].GetShaderDesc(pDesc, false);
+    hr = Data.pShader[ShaderIndex].GetShaderDesc(pDesc, false);
 
 lExit:
     return hr;

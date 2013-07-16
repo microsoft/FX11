@@ -711,7 +711,7 @@ HRESULT SAnonymousShader::GetShaderDesc(_In_ uint32_t ShaderIndex, _Out_ D3DX11_
 
     ANONYMOUS_SHADER_INDEX_CHECK();
 
-    pShaderBlock->GetShaderDesc(pDesc, true);
+    hr = pShaderBlock->GetShaderDesc(pDesc, true);
 
 lExit:
     return hr;

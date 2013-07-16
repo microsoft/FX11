@@ -386,10 +386,13 @@ HRESULT SShaderBlock::GetShaderDesc(_Out_ D3DX11_EFFECT_SHADER_DESC *pDesc, _In_
         _Analysis_assume_( pReflectionData->pReflection != 0 );
 
         D3D11_SHADER_DESC ShaderDesc;
-        pReflectionData->pReflection->GetDesc( &ShaderDesc );
-        pDesc->NumInputSignatureEntries = ShaderDesc.InputParameters;
-        pDesc->NumOutputSignatureEntries = ShaderDesc.OutputParameters;
-        pDesc->NumPatchConstantSignatureEntries = ShaderDesc.PatchConstantParameters;
+        hr = pReflectionData->pReflection->GetDesc( &ShaderDesc );
+        if ( SUCCEEDED(hr) )
+        {
+            pDesc->NumInputSignatureEntries = ShaderDesc.InputParameters;
+            pDesc->NumOutputSignatureEntries = ShaderDesc.OutputParameters;
+            pDesc->NumPatchConstantSignatureEntries = ShaderDesc.PatchConstantParameters;
+        }
     }
 lExit:
     return hr;

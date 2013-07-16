@@ -153,18 +153,21 @@ HRESULT WINAPI D3DX11CreateEffectFromFile( LPCWSTR pFileName, UINT FXFlags, ID3D
 
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
-    WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
-    const CHAR* pstrName = strrchr( strFileA, '\\' );
-    if (!pstrName)
+    int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
+    if (result > 0)
     {
-        pstrName = strFileA;
-    }
-    else
-    {
-        pstrName++;
-    }
+        const CHAR* pstrName = strrchr(strFileA, '\\');
+        if (!pstrName)
+        {
+            pstrName = strFileA;
+        }
+        else
+        {
+            pstrName++;
+        }
 
-    VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
+        VH(((CEffect*) (*ppEffect))->BindToDevice(pDevice, pstrName));
+    }
 
 lExit:
     if (FAILED(hr))
@@ -196,7 +199,6 @@ HRESULT D3DX11CompileEffectFromMemory( LPCVOID pData, SIZE_T DataLength, LPCSTR 
     if ( FAILED(hr) )
     {
         DPF(0, "D3DCompile of fx_5_0 profile failed: %08X", hr );
-        SAFE_RELEASE( blob );
         return hr;
     }
 
@@ -234,7 +236,7 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
 
     ID3DBlob *blob = nullptr;
 
-#if D3D_COMPILER_VERSION >= 46
+#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_APP) )
 
     HRESULT hr = D3DCompileFromFile( pFileName, pDefines, pInclude, "", "fx_5_0", HLSLFlags, FXFlags, &blob, ppErrors );
     if ( FAILED(hr) )
@@ -257,7 +259,13 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
 
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
-    WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
+    int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
+    if ( !result )
+    {
+        DPF(0, "Failed to load effect file due to WC to MB conversion failure: %S", pFileName);
+        return E_FAIL;
+    }
+
     const CHAR* pstrName = strrchr( strFileA, '\\' );
     if (!pstrName)
     {
@@ -292,7 +300,7 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
     VH( ((CEffect*)(*ppEffect))->LoadEffect(blob->GetBufferPointer(), static_cast<uint32_t>( blob->GetBufferSize() ) ) );
     SAFE_RELEASE( blob );
 
-#if D3D_COMPILER_VERSION >= 46
+#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_APP) )
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
     WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );

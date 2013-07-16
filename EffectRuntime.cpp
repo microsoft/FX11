@@ -300,8 +300,11 @@ bool CEffect::ApplyRenderStateBlock(_In_ SBaseBlock *pBlock)
                 _Analysis_assume_(pSBlock->pD3DObject != 0);
                 pSBlock->pD3DObject->Release();
 
-                m_pDevice->CreateSamplerState( &pSBlock->BackingStore.SamplerDesc, &pSBlock->pD3DObject );
-                SetDebugObjectName(pSBlock->pD3DObject, "D3DX11Effect" );
+                HRESULT hr = m_pDevice->CreateSamplerState( &pSBlock->BackingStore.SamplerDesc, &pSBlock->pD3DObject );
+                if ( SUCCEEDED(hr) )
+                {
+                    SetDebugObjectName(pSBlock->pD3DObject, "D3DX11Effect");
+                }
             }
             break;
 

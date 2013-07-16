@@ -15,7 +15,7 @@
 
 #pragma once
 
-#define D3DX11_EFFECTS_VERSION 1106
+#define D3DX11_EFFECTS_VERSION 1107
 
 #include <d3d11.h>
 #include <d3d11shader.h>
@@ -42,6 +42,7 @@
 #define _Outptr_result_buffer_(exp) _Deref_post_cap_x_(exp)
 #define _Outptr_result_buffer_all_maybenull_(exp) _Deref_post_opt_cap_x_(exp)
 #define _COM_Outptr_ _Deref_out_
+#define _When_(test,exp)
 #endif
 
 #ifndef _Use_decl_annotations_
