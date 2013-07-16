@@ -242,7 +242,6 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
     if ( FAILED(hr) )
     {
         DPF(0, "D3DCompileFromFile of fx_5_0 profile failed %08X: %S", hr, pFileName );
-        SAFE_RELEASE( blob );
         return hr;
     }
 
@@ -280,7 +279,6 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
     if ( FAILED(hr) )
     {
         DPF(0, "D3DCompile of fx_5_0 profile failed: %08X", hr );
-        SAFE_RELEASE( blob );
         return hr;
     }
 
@@ -303,19 +301,24 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
 #if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_APP) )
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
-    WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
-    const CHAR* pstrName = strrchr( strFileA, '\\' );
-    if (!pstrName)
+    int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
+    if ( result > 0 )
     {
-        pstrName = strFileA;
-    }
-    else
-    {
-        pstrName++;
-    }
-#endif
+        const CHAR* pstrName = strrchr( strFileA, '\\' );
+        if (!pstrName)
+        {
+            pstrName = strFileA;
+        }
+        else
+        {
+            pstrName++;
+        }
 
+        VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
+    }
+#else
     VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
+#endif
 
 lExit:
     if (FAILED(hr))
