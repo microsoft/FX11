@@ -123,22 +123,34 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <GenerateManifest>false</GenerateManifest>
+    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,6 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,6 +172,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,6 +186,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -185,6 +200,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -198,6 +214,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -211,6 +228,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Binary;.\Inc;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pchfx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
