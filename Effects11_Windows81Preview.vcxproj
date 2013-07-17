@@ -123,33 +123,33 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>Bin\Winodws81Preview\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Bin\Windows81Preview\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Effects11</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
