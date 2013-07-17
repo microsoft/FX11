@@ -154,20 +154,24 @@ HRESULT WINAPI D3DX11CreateEffectFromFile( LPCWSTR pFileName, UINT FXFlags, ID3D
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
     int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
-    if (result > 0)
+    if ( !result )
     {
-        const CHAR* pstrName = strrchr(strFileA, '\\');
-        if (!pstrName)
-        {
-            pstrName = strFileA;
-        }
-        else
-        {
-            pstrName++;
-        }
-
-        VH(((CEffect*) (*ppEffect))->BindToDevice(pDevice, pstrName));
+        DPF(0, "Failed to load effect file due to WC to MB conversion failure: %S", pFileName);
+        hr = E_FAIL;
+        goto lExit;
     }
+
+    const CHAR* pstrName = strrchr( strFileA, '\\' );
+    if (!pstrName)
+    {
+        pstrName = strFileA;
+    }
+    else
+    {
+        pstrName++;
+    }
+
+    VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
 
 lExit:
     if (FAILED(hr))
@@ -302,23 +306,25 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
     int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
-    if ( result > 0 )
+    if ( !result  )
     {
-        const CHAR* pstrName = strrchr( strFileA, '\\' );
-        if (!pstrName)
-        {
-            pstrName = strFileA;
-        }
-        else
-        {
-            pstrName++;
-        }
-
-        VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
+        DPF(0, "Failed to load effect file due to WC to MB conversion failure: %S", pFileName);
+        hr = E_FAIL;
+        goto lExit;
     }
-#else
-    VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
+
+    const CHAR* pstrName = strrchr( strFileA, '\\' );
+    if (!pstrName)
+    {
+        pstrName = strFileA;
+    }
+    else
+    {
+        pstrName++;
+    }
 #endif
+
+    VH( ((CEffect*)(*ppEffect))->BindToDevice(pDevice, pstrName) );
 
 lExit:
     if (FAILED(hr))
