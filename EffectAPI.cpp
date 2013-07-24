@@ -32,7 +32,7 @@ inline HANDLE safe_handle( HANDLE h ) { return (h == INVALID_HANDLE_VALUE) ? 0 :
 static HRESULT LoadBinaryFromFile( _In_z_ LPCWSTR pFileName, _Inout_ std::unique_ptr<uint8_t[]>& data, _Out_ uint32_t& size )
 {
     // open the file
-#if (_WIN32_WINNT >= 0x0602 /*_WIN32_WINNT_WIN8*/)
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
     ScopedHandle hFile( safe_handle( CreateFile2( pFileName,
                                                   GENERIC_READ,
                                                   FILE_SHARE_READ,

@@ -24,6 +24,10 @@
 #include <algorithm>
 #include <d3d11.h>
 
+#ifndef _WIN32_WINNT_WIN8
+#define _WIN32_WINNT_WIN8 0x0602
+#endif
+
 #undef DEFINE_GUID
 #include "INITGUID.h"
 
