@@ -23,7 +23,7 @@ namespace D3DX11Debug
     // Helper sets a D3D resource name string (used by PIX and debug layer leak reporting).
     inline void SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_z_ const char *name )
     {
-        #if defined(_DEBUG) || defined(PROFILE)
+        #if !defined(NO_D3D11_DEBUG_NAME) && ( defined(_DEBUG) || defined(PROFILE) )
             resource->SetPrivateData( WKPDID_D3DDebugObjectName, static_cast<UINT>(strlen(name)), name );
         #else
             UNREFERENCED_PARAMETER(resource);
@@ -34,7 +34,7 @@ namespace D3DX11Debug
     template<UINT TNameLength>
     inline void SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_z_ const char (&name)[TNameLength])
     {
-        #if defined(_DEBUG) || defined(PROFILE)
+        #if !defined(NO_D3D11_DEBUG_NAME) && ( defined(_DEBUG) || defined(PROFILE) )
             resource->SetPrivateData(WKPDID_D3DDebugObjectName, TNameLength - 1, name);
         #else
             UNREFERENCED_PARAMETER(resource);
