@@ -2476,6 +2476,7 @@ HRESULT CEffectLoader::LoadAnnotations(uint32_t  *pcAnnotations, SAnnotation **p
                 {
                     // Read initializer offset
                     VHD( m_msStructured.Read(&oData), "Invalid pEffectBuffer: cannot read string."  );
+#pragma warning( disable : 6011 )
                     VHD( GetStringAndAddToReflection(oData, &pAn->Data.pString[j].pString), "Invalid pEffectBuffer: cannot read string initializer."  );
                 }
             }

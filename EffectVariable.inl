@@ -781,6 +781,7 @@ lExit:
 }
 #pragma warning(pop)
 
+#pragma warning( disable : 6103 )
 template<ETemplateVarType SourceType, ETemplateVarType DestType, typename SRC_TYPE, typename DEST_TYPE>
 inline HRESULT GetScalarArray(_In_reads_(Count) SRC_TYPE *pSrcValues, _Out_writes_(Count) DEST_TYPE *pDestValues,
                               _In_ uint32_t Offset, _In_ uint32_t Count, 
