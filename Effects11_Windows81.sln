@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.20617.1 PREVIEW
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Effects11_Windows81Preview", "Effects11_Windows81Preview.vcxproj", "{3218B7F0-ABB8-47C3-8036-B61756E8ACC3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Effects11_Windows81", "Effects11_Windows81.vcxproj", "{3218B7F0-ABB8-47C3-8036-B61756E8ACC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
