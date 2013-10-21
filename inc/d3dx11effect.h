@@ -15,7 +15,7 @@
 
 #pragma once
 
-#define D3DX11_EFFECTS_VERSION 1107
+#define D3DX11_EFFECTS_VERSION 1108
 
 #include <d3d11.h>
 #include <d3d11shader.h>
