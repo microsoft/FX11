@@ -20,6 +20,9 @@
 #include <d3d11.h>
 #include <d3d11shader.h>
 
+#pragma comment( lib, "d3dcompiler.lib" )
+#pragma comment( lib, "dxguid.lib" )
+
 #pragma warning(push)
 #pragma warning(disable : 4005)
 #include <stdint.h>
