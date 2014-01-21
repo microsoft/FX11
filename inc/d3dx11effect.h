@@ -23,6 +23,7 @@
 #pragma comment( lib, "d3dcompiler.lib" )
 #pragma comment( lib, "dxguid.lib" )
 
+// VS 2010's stdint.h conflicts with intsafe.h
 #pragma warning(push)
 #pragma warning(disable : 4005)
 #include <stdint.h>
