@@ -405,7 +405,7 @@ HRESULT SShaderBlock::GetVertexShader(_Outptr_ ID3D11VertexShader **ppVS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppVS = reinterpret_cast<ID3D11VertexShader *>( pD3DObject );
+        *ppVS = static_cast<ID3D11VertexShader *>( pD3DObject );
         SAFE_ADDREF(*ppVS);
         return S_OK;
     }
@@ -425,7 +425,7 @@ HRESULT SShaderBlock::GetGeometryShader(_Outptr_ ID3D11GeometryShader **ppGS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppGS = reinterpret_cast<ID3D11GeometryShader *>( pD3DObject );
+        *ppGS = static_cast<ID3D11GeometryShader *>( pD3DObject );
         SAFE_ADDREF(*ppGS);
         return S_OK;
     }
@@ -444,7 +444,7 @@ HRESULT SShaderBlock::GetPixelShader(_Outptr_ ID3D11PixelShader **ppPS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppPS = reinterpret_cast<ID3D11PixelShader *>( pD3DObject );
+        *ppPS = static_cast<ID3D11PixelShader *>( pD3DObject );
         SAFE_ADDREF(*ppPS);
         return S_OK;
     }
@@ -462,7 +462,7 @@ HRESULT SShaderBlock::GetHullShader(_Outptr_ ID3D11HullShader **ppHS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppHS = reinterpret_cast<ID3D11HullShader *>( pD3DObject );
+        *ppHS = static_cast<ID3D11HullShader *>( pD3DObject );
         SAFE_ADDREF(*ppHS);
         return S_OK;
     }
@@ -480,7 +480,7 @@ HRESULT SShaderBlock::GetDomainShader(_Outptr_ ID3D11DomainShader **ppDS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppDS = reinterpret_cast<ID3D11DomainShader *>( pD3DObject );
+        *ppDS = static_cast<ID3D11DomainShader *>( pD3DObject );
         SAFE_ADDREF(*ppDS);
         return S_OK;
     }
@@ -498,7 +498,7 @@ HRESULT SShaderBlock::GetComputeShader(_Outptr_ ID3D11ComputeShader **ppCS)
     {
         assert( pD3DObject != 0 );
         _Analysis_assume_( pD3DObject != 0 );
-        *ppCS = reinterpret_cast<ID3D11ComputeShader *>( pD3DObject );
+        *ppCS = static_cast<ID3D11ComputeShader *>( pD3DObject );
         SAFE_ADDREF(*ppCS);
         return S_OK;
     }
