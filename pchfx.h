@@ -23,10 +23,17 @@
 
 #include <algorithm>
 
-#if (_WIN32_WINNT >= 0x0602) || defined(_WIN7_PLATFORM_UPDATE) 
+#if defined(_XBOX_ONE) && defined(_TITLE)
+#include <d3d11_x.h>
+#include <D3DCompiler_x.h>
+#define DCOMMON_H_INCLUDED
+#define NO_D3D11_DEBUG_NAME
+#elif (_WIN32_WINNT >= 0x0602) || defined(_WIN7_PLATFORM_UPDATE) 
 #include <d3d11_1.h>
+#include <D3DCompiler.h>
 #else
 #include <d3d11.h>
+#include <D3DCompiler.h>
 #endif
 
 #ifndef _WIN32_WINNT_WIN8
@@ -52,6 +59,4 @@
 #include "Effect.h"
 #include "EffectStateBase11.h"
 #include "EffectLoad.h"
-
-#include <D3DCompiler.h>
 
