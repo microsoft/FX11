@@ -22,7 +22,12 @@
 #endif
 
 #include <algorithm>
+
+#if (_WIN32_WINNT >= 0x0602) || defined(_WIN7_PLATFORM_UPDATE) 
+#include <d3d11_1.h>
+#else
 #include <d3d11.h>
+#endif
 
 #ifndef _WIN32_WINNT_WIN8
 #define _WIN32_WINNT_WIN8 0x0602

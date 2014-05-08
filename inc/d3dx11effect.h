@@ -17,7 +17,11 @@
 
 #define D3DX11_EFFECTS_VERSION 1109
 
+#if (_WIN32_WINNT >= 0x0602) || defined(_WIN7_PLATFORM_UPDATE) 
+#include <d3d11_1.h>
+#else
 #include <d3d11.h>
+#endif
 #include <d3d11shader.h>
 
 #pragma comment( lib, "d3dcompiler.lib" )

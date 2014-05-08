@@ -781,7 +781,11 @@ CEffect::~CEffect()
 
     // Mute debug spew
     if (m_pDevice)
-        m_pDevice->QueryInterface(__uuidof(ID3D11InfoQueue), (void**) &pInfoQueue);
+    {
+        HRESULT hr = m_pDevice->QueryInterface(__uuidof(ID3D11InfoQueue), (void**) &pInfoQueue);
+        if ( FAILED(hr) )
+            pInfoQueue = nullptr;
+    }
 
     if (pInfoQueue)
     {
