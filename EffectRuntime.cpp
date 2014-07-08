@@ -369,7 +369,7 @@ void CEffect::ValidateIndex(_In_ uint32_t Elements)
 {
     if (m_FXLIndex >= Elements)
     {
-        DPF(0, "ID3DX11Effect: Overindexing variable array (size: %d, index: %d), using index = 0 instead", Elements, m_FXLIndex);
+        DPF(0, "ID3DX11Effect: Overindexing variable array (size: %u, index: %u), using index = 0 instead", Elements, m_FXLIndex);
         m_FXLIndex = 0;
     }
 }
@@ -647,7 +647,7 @@ void CEffect::IncrementTimer()
 #if _DEBUG
     if (m_LocalTimer > g_TimerRolloverCount)
     {
-        DPF(0, "Rolling over timer (current time: %d, rollover cap: %d).", m_LocalTimer, g_TimerRolloverCount);
+        DPF(0, "Rolling over timer (current time: %u, rollover cap: %u).", m_LocalTimer, g_TimerRolloverCount);
 #else
     if (m_LocalTimer >= 0x80000000) // check to see if we've exceeded ~2 billion
     {

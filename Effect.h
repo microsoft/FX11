@@ -19,7 +19,7 @@
 #include "IUnknownImp.h"
 
 #ifdef _DEBUG
-extern void __cdecl D3DXDebugPrintf(UINT lvl, LPCSTR szFormat, ...);
+extern void __cdecl D3DXDebugPrintf(UINT lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
 #define DPF D3DXDebugPrintf
 #else
 #define DPF
@@ -581,7 +581,7 @@ typedef SShaderDependency<SUnorderedAccessView*, ID3D11UnorderedAccessView*> SUn
 typedef SShaderDependency<SInterface*, ID3D11ClassInstance*> SInterfaceDependency;
 
 // Shader VTables are used to eliminate branching in ApplyShaderBlock.
-// The effect owns three D3DShaderVTables, one for PS, one for VS, and one for GS.
+// The effect owns one D3DShaderVTables for each shader stage
 struct SD3DShaderVTable
 {
     void ( __stdcall ID3D11DeviceContext::*pSetShader)(ID3D11DeviceChild* pShader, ID3D11ClassInstance*const* ppClassInstances, uint32_t NumClassInstances);

@@ -560,7 +560,7 @@ HRESULT SShaderBlock::GetSignatureElementDesc(ESigType SigType, uint32_t Element
         case ST_Input:
             if( Element >= ShaderDesc.InputParameters )
             {
-                DPF( 0, "%s: Invalid Element index (%d) specified", pFuncName, Element );
+                DPF( 0, "%s: Invalid Element index (%u) specified", pFuncName, Element );
                 VH( E_INVALIDARG );
             }
             VH( pReflectionData->pReflection->GetInputParameterDesc( Element, &ParamDesc ) );
@@ -568,7 +568,7 @@ HRESULT SShaderBlock::GetSignatureElementDesc(ESigType SigType, uint32_t Element
         case ST_Output:
             if( Element >= ShaderDesc.OutputParameters )
             {
-                DPF( 0, "%s: Invalid Element index (%d) specified", pFuncName, Element );
+                DPF( 0, "%s: Invalid Element index (%u) specified", pFuncName, Element );
                 VH( E_INVALIDARG );
             }
             VH( pReflectionData->pReflection->GetOutputParameterDesc( Element, &ParamDesc ) );
@@ -576,7 +576,7 @@ HRESULT SShaderBlock::GetSignatureElementDesc(ESigType SigType, uint32_t Element
         case ST_PatchConstant:
             if( Element >= ShaderDesc.PatchConstantParameters )
             {
-                DPF( 0, "%s: Invalid Element index (%d) specified", pFuncName, Element );
+                DPF( 0, "%s: Invalid Element index (%u) specified", pFuncName, Element );
                 VH( E_INVALIDARG );
             }
             VH( pReflectionData->pReflection->GetPatchConstantParameterDesc( Element, &ParamDesc ) );
@@ -1483,7 +1483,7 @@ SVariable * CEffect::FindVariableByNameWithParsing(_In_z_ LPCSTR pName)
             pVariable = FindLocalVariableByName(pName);
             if( pVariable == nullptr )
             {
-                DPF( 0, "Name %s is too long to parse", &pName );
+                DPF( 0, "Name %s is too long to parse", pName );
             }
             return pVariable;
         }
@@ -2467,7 +2467,7 @@ HRESULT CEffect::Optimize()
     SAFE_DELETE(m_pStringPool);
     SAFE_DELETE(m_pPooledHeap);
 
-    DPF(0, "ID3DX11Effect::Optimize: %d bytes of reflection data freed.", m_pReflection->m_Heap.GetSize());
+    DPF(0, "ID3DX11Effect::Optimize: %u bytes of reflection data freed.", m_pReflection->m_Heap.GetSize());
     SAFE_DELETE(m_pReflection);
     m_Flags |= D3DX11_EFFECT_OPTIMIZED;
 

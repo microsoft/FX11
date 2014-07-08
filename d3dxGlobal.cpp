@@ -373,6 +373,7 @@ uint32_t CDataBlockStore::GetSize()
 //////////////////////////////////////////////////////////////////////////
 
 #ifdef _DEBUG
+_Use_decl_annotations_
 void __cdecl D3DXDebugPrintf(UINT lvl, LPCSTR szFormat, ...)
 {
     UNREFERENCED_PARAMETER(lvl);

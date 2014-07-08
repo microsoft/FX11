@@ -59,7 +59,7 @@ ID3DX11EffectVariable * GetAnnotationByIndexHelper(const char *pClassName, uint3
 {
     if (Index >= AnnotationCount)
     {
-        DPF(0, "%s::GetAnnotationByIndex: Invalid index (%d, total: %d)", pClassName, Index, AnnotationCount);
+        DPF(0, "%s::GetAnnotationByIndex: Invalid index (%u, total: %u)", pClassName, Index, AnnotationCount);
         return &g_InvalidScalarVariable;
     }
 
@@ -206,7 +206,7 @@ static ID3DX11EffectType * GetTypeByIndexHelper(uint32_t Index, uint32_t  Variab
 
     if (Index >= VariableCount)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, VariableCount);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, VariableCount);
         return &g_InvalidType;
     }
 
@@ -331,7 +331,7 @@ LPCSTR SType::GetMemberName(_In_ uint32_t Index)
 
     if (Index >= StructType.Members)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, StructType.Members);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, StructType.Members);
         return nullptr;
     }
 
@@ -358,7 +358,7 @@ LPCSTR SType::GetMemberSemantic(_In_ uint32_t Index)
 
     if (Index >= StructType.Members)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, StructType.Members);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, StructType.Members);
         return nullptr;
     }
 
@@ -1096,7 +1096,7 @@ LPCSTR SConstantBuffer::GetMemberName(_In_ uint32_t Index)
 
     if (Index >= VariableCount)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, VariableCount);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, VariableCount);
         return nullptr;
     }
 
@@ -1115,7 +1115,7 @@ LPCSTR SConstantBuffer::GetMemberSemantic(_In_ uint32_t Index)
 
     if (Index >= VariableCount)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, VariableCount);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, VariableCount);
         return nullptr;
     }
 
@@ -1792,7 +1792,7 @@ ID3DX11EffectPass * STechnique::GetPassByIndex(_In_ uint32_t Index)
 
     if (Index >= PassCount)
     {
-        DPF(0, "%s: Invalid pass index (%d, total: %d)", pFuncName, Index, PassCount);
+        DPF(0, "%s: Invalid pass index (%u, total: %u)", pFuncName, Index, PassCount);
         return &g_InvalidPass;
     }
 
@@ -1888,7 +1888,7 @@ ID3DX11EffectTechnique * SGroup::GetTechniqueByIndex(_In_ uint32_t Index)
 
     if (Index >= TechniqueCount)
     {
-        DPF(0, "%s: Invalid pass index (%d, total: %d)", pFuncName, Index, TechniqueCount);
+        DPF(0, "%s: Invalid pass index (%u, total: %u)", pFuncName, Index, TechniqueCount);
         return &g_InvalidTechnique;
     }
 
@@ -2083,7 +2083,7 @@ ID3DX11EffectTechnique * CEffect::GetTechniqueByIndex(_In_ uint32_t Index)
         }
         assert( false );
     }
-    DPF(0, "%s: Invalid technique index (%d)", pFuncName, Index);
+    DPF(0, "%s: Invalid technique index (%u)", pFuncName, Index);
     return &g_InvalidTechnique;
 }
 
@@ -2107,7 +2107,7 @@ ID3DX11EffectTechnique * CEffect::GetTechniqueByName(_In_z_ LPCSTR Name)
 
     if( FAILED( strcpy_s( NameCopy, MAX_GROUP_TECHNIQUE_SIZE, Name ) ) )
     {
-        DPF( 0, "Group|Technique name has a length greater than %d.", MAX_GROUP_TECHNIQUE_SIZE );
+        DPF( 0, "Group|Technique name has a length greater than %u.", MAX_GROUP_TECHNIQUE_SIZE );
         return &g_InvalidTechnique;
     }
 
@@ -2143,7 +2143,7 @@ ID3DX11EffectGroup * CEffect::GetGroupByIndex(_In_ uint32_t Index)
     {
         return (ID3DX11EffectGroup *)(m_pGroups + Index);
     }
-    DPF(0, "%s: Invalid group index (%d)", pFuncName, Index);
+    DPF(0, "%s: Invalid group index (%u)", pFuncName, Index);
     return &g_InvalidGroup;
 }
 

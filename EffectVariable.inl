@@ -526,7 +526,7 @@ bool GetVariableByIndexHelper(_In_ uint32_t Index, _In_ uint32_t  VariableCount,
 
     if (Index >= VariableCount)
     {
-        DPF(0, "%s: Invalid index (%d, total: %d)", pFuncName, Index, VariableCount);
+        DPF(0, "%s: Invalid index (%u, total: %u)", pFuncName, Index, VariableCount);
         return false;
     }
 
@@ -931,7 +931,7 @@ struct TVariable : public IBaseInterface
 
         if (Index >= pType->Elements)
         {
-            DPF(0, "%s: Invalid element index (%d, total: %d)", pFuncName, Index, pType->Elements);
+            DPF(0, "%s: Invalid element index (%u, total: %u)", pFuncName, Index, pType->Elements);
             return &g_InvalidScalarVariable;
         }
 
