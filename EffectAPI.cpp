@@ -240,7 +240,7 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
 
     ID3DBlob *blob = nullptr;
 
-#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_APP) )
+#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || ( (WINAPI_FAMILY != WINAPI_FAMILY_APP) && (WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP) ) )
 
     HRESULT hr = D3DCompileFromFile( pFileName, pDefines, pInclude, "", "fx_5_0", HLSLFlags, FXFlags, &blob, ppErrors );
     if ( FAILED(hr) )
@@ -302,7 +302,7 @@ HRESULT D3DX11CompileEffectFromFile( LPCWSTR pFileName,
     VH( ((CEffect*)(*ppEffect))->LoadEffect(blob->GetBufferPointer(), static_cast<uint32_t>( blob->GetBufferSize() ) ) );
     SAFE_RELEASE( blob );
 
-#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_APP) )
+#if (D3D_COMPILER_VERSION >= 46) && ( !defined(WINAPI_FAMILY) || ( (WINAPI_FAMILY != WINAPI_FAMILY_APP) && (WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP) ) )
     // Create debug object name from input filename
     CHAR strFileA[MAX_PATH];
     int result = WideCharToMultiByte( CP_ACP, WC_NO_BEST_FIT_CHARS, pFileName, -1, strFileA, MAX_PATH, nullptr, FALSE );
