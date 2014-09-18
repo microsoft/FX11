@@ -830,9 +830,9 @@ struct TVariable : public IBaseInterface
     {
         SVariable *pMember;
         UDataPointer dataPtr;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity = GetTopLevelEntity();
+        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
 
-        if (((ID3DX11Effect*)pTopLevelEntity->pEffect)->IsOptimized())
+        if (((ID3DX11Effect*)pTopLevelEntity2->pEffect)->IsOptimized())
         {
             DPF(0, "ID3DX11EffectVariable::GetMemberByIndex: Cannot get members; effect has been Optimize()'ed");
             return &g_InvalidScalarVariable;
@@ -850,7 +850,7 @@ struct TVariable : public IBaseInterface
             return &g_InvalidScalarVariable;
         }
 
-        return pTopLevelEntity->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity, pMember, dataPtr, false, Index);
+        return pTopLevelEntity2->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity2, pMember, dataPtr, false, Index);
     }
 
     STDMETHOD_(ID3DX11EffectVariable*, GetMemberByName)(_In_z_ LPCSTR Name)
@@ -858,9 +858,9 @@ struct TVariable : public IBaseInterface
         SVariable *pMember;
         UDataPointer dataPtr;
         uint32_t index;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity = GetTopLevelEntity();
+        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
 
-        if (pTopLevelEntity->pEffect->IsOptimized())
+        if (pTopLevelEntity2->pEffect->IsOptimized())
         {
             DPF(0, "ID3DX11EffectVariable::GetMemberByName: Cannot get members; effect has been Optimize()'ed");
             return &g_InvalidScalarVariable;
@@ -879,7 +879,7 @@ struct TVariable : public IBaseInterface
 
         }
 
-        return pTopLevelEntity->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity, pMember, dataPtr, false, index);
+        return pTopLevelEntity2->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity2, pMember, dataPtr, false, index);
     }
 
     STDMETHOD_(ID3DX11EffectVariable*, GetMemberBySemantic)(_In_z_ LPCSTR Semantic)
@@ -887,9 +887,9 @@ struct TVariable : public IBaseInterface
         SVariable *pMember;
         UDataPointer dataPtr;
         uint32_t index;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity = GetTopLevelEntity();
+        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
 
-        if (pTopLevelEntity->pEffect->IsOptimized())
+        if (pTopLevelEntity2->pEffect->IsOptimized())
         {
             DPF(0, "ID3DX11EffectVariable::GetMemberBySemantic: Cannot get members; effect has been Optimize()'ed");
             return &g_InvalidScalarVariable;
@@ -908,16 +908,16 @@ struct TVariable : public IBaseInterface
 
         }
 
-        return pTopLevelEntity->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity, pMember, dataPtr, false, index);
+        return pTopLevelEntity2->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity2, pMember, dataPtr, false, index);
     }
 
     STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index)
     {
         static LPCSTR pFuncName = "ID3DX11EffectVariable::GetElement";
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity = GetTopLevelEntity();
+        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
         UDataPointer dataPtr;
 
-        if (pTopLevelEntity->pEffect->IsOptimized())
+        if (pTopLevelEntity2->pEffect->IsOptimized())
         {
             DPF(0, "ID3DX11EffectVariable::GetElement: Cannot get element; effect has been Optimize()'ed");
             return &g_InvalidScalarVariable;
@@ -949,7 +949,7 @@ struct TVariable : public IBaseInterface
             }
         }
 
-        return pTopLevelEntity->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity, (SVariable *) this, dataPtr, true, Index);
+        return pTopLevelEntity2->pEffect->CreatePooledVariableMemberInterface(pTopLevelEntity2, (SVariable *) this, dataPtr, true, Index);
     }
 
     STDMETHOD_(ID3DX11EffectScalarVariable*, AsScalar)()
