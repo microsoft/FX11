@@ -60,6 +60,9 @@ in a future update.
 RELEASE HISTORY
 ---------------
 
+April 14, 2015 (11.12)
+    More updates for VS 2015
+
 November 24, 2014 (11.11)
     Updates for Visual Studio 2015 Technical Preview
 
