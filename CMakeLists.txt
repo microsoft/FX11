@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2.2)
-project(Effects11)
+project(FX11)
 
 
 # Variables
@@ -15,7 +15,7 @@ if(NOT DEFINED CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX "D")
 endif()
 
-add_library(Effects11 STATIC
+add_library(${PROJECT_NAME} STATIC
   ${PUBLIC_HEADER_FILES}
   Effect.h
   EffectLoad.h
@@ -29,12 +29,12 @@ add_library(Effects11 STATIC
   EffectReflection.cpp
   EffectRuntime.cpp)
 							 
-target_include_directories(Effects11 
+target_include_directories(${PROJECT_NAME} 
 	PRIVATE "${ROOT_DIR}/Binary"
 	PUBLIC "${ROOT_DIR}/inc")
 
 # Setup install target
-install(TARGETS Effects11
+install(TARGETS ${PROJECT_NAME}
   DESTINATION lib)
 
 install(FILES ${PUBLIC_HEADER_FILES}
