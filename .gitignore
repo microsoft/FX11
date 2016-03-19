@@ -15,6 +15,7 @@
 *.tlog
 *.lastbuildstate
 *.ilk
+*.VC.db
 /ipch
 Bin
 /wiki
