@@ -32,11 +32,7 @@
 #pragma comment( lib, "d3dcompiler.lib" )
 #pragma comment( lib, "dxguid.lib" )
 
-// VS 2010's stdint.h conflicts with intsafe.h
-#pragma warning(push)
-#pragma warning(disable : 4005)
 #include <stdint.h>
-#pragma warning(pop)
 
 #if defined(_MSC_VER) && (_MSC_VER<1610) && !defined(_In_reads_)
 #define _Analysis_assume_(exp) __analysis_assume(exp)
