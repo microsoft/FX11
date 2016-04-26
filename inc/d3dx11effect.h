@@ -34,30 +34,6 @@
 
 #include <stdint.h>
 
-#if defined(_MSC_VER) && (_MSC_VER<1610) && !defined(_In_reads_)
-#define _Analysis_assume_(exp) __analysis_assume(exp)
-#define _In_reads_(exp) _In_count_x_(exp)
-#define _In_reads_opt_(exp) _In_opt_count_x_(exp)
-#define _In_reads_bytes_(exp) _In_bytecount_x_(exp)
-#define _Inout_updates_(exp) _Inout_cap_x_(exp)
-#define _Inout_updates_z_(exp) _Inout_z_cap_x_(exp)
-#define _Inout_updates_bytes_(exp) _Inout_bytecap_x_(exp)
-#define _Out_writes_(exp) _Out_cap_x_(exp)
-#define _Out_writes_bytes_(exp) _Out_bytecap_x_(exp)
-#define _Outptr_ _Deref_out_
-#define _Outptr_result_z_ _Deref_out_z_
-#define _Outptr_opt_result_maybenull_ _Deref_opt_out_opt_
-#define _Outptr_result_maybenull_z_ _Deref_opt_out_opt_z_
-#define _Outptr_result_buffer_(exp) _Deref_post_cap_x_(exp)
-#define _Outptr_result_buffer_all_maybenull_(exp) _Deref_post_opt_cap_x_(exp)
-#define _COM_Outptr_ _Deref_out_
-#define _When_(test,exp)
-#endif
-
-#ifndef _Use_decl_annotations_
-#define _Use_decl_annotations_
-#endif
-
 //////////////////////////////////////////////////////////////////////////////
 // File contents:
 //
