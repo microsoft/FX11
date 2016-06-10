@@ -98,7 +98,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>Bin\WindowsPhone81\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\WindowsPhone81\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>Effects11</TargetName>
+    <TargetName>Effects11d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Bin\WindowsPhone81\$(Platform)\$(Configuration)\</OutDir>
@@ -107,7 +107,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>Bin\WindowsPhone81\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>Effects11</TargetName>
+    <TargetName>Effects11d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>Bin\WindowsPhone81\$(Platform)\$(Configuration)\</OutDir>
