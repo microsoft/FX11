@@ -122,7 +122,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\Windows81\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>Effects11</TargetName>
+    <TargetName>Effects11d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
@@ -132,7 +132,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\Windows81\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>Effects11</TargetName>
+    <TargetName>Effects11d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
@@ -142,7 +142,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\Windows81\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>Effects11</TargetName>
+    <TargetName>Effects11d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>Bin\Windows81\$(Platform)\$(Configuration)\</OutDir>
