@@ -24,7 +24,14 @@ namespace D3DX11Debug
     inline void SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_z_ const char *name )
     {
         #if !defined(NO_D3D11_DEBUG_NAME) && ( defined(_DEBUG) || defined(PROFILE) )
-            resource->SetPrivateData( WKPDID_D3DDebugObjectName, static_cast<UINT>(strlen(name)), name );
+            // check if resource is already named
+            unsigned int prev_size = 0;
+            HRESULT hr = resource->GetPrivateData(WKPDID_D3DDebugObjectName, &prev_size, nullptr);
+
+            // don't rename already named resource to avoid STATE_SETTING WARNING #55: SETPRIVATEDATA_CHANGINGPARAMS
+            if (FAILED(hr)) {
+                resource->SetPrivateData(WKPDID_D3DDebugObjectName, static_cast<UINT>(strlen(name)), name);
+            }
         #else
             UNREFERENCED_PARAMETER(resource);
             UNREFERENCED_PARAMETER(name);
@@ -35,7 +42,14 @@ namespace D3DX11Debug
     inline void SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_z_ const char (&name)[TNameLength])
     {
         #if !defined(NO_D3D11_DEBUG_NAME) && ( defined(_DEBUG) || defined(PROFILE) )
-            resource->SetPrivateData(WKPDID_D3DDebugObjectName, TNameLength - 1, name);
+            // check if resource is already named
+            unsigned int prev_size = 0;
+            HRESULT hr = resource->GetPrivateData(WKPDID_D3DDebugObjectName, &prev_size, nullptr);
+
+            // don't rename already named resource to avoid STATE_SETTING WARNING #55: SETPRIVATEDATA_CHANGINGPARAMS
+            if (FAILED(hr)) {
+                resource->SetPrivateData(WKPDID_D3DDebugObjectName, static_cast<UINT>(strlen(name)), name);
+            }
         #else
             UNREFERENCED_PARAMETER(resource);
             UNREFERENCED_PARAMETER(name);
