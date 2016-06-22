@@ -21,6 +21,11 @@ For the latest version of FX11, more detailed documentation, etc., please visit 
 
 http://go.microsoft.com/fwlink/p/?LinkId=271568
 
+This project has adopted the Microsoft Open Source Code of Conduct. For more information see the
+Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
+
+https://opensource.microsoft.com/codeofconduct/
+
 
 -------
 SAMPLES
