@@ -54,7 +54,7 @@ static HRESULT LoadBinaryFromFile( _In_z_ LPCWSTR pFileName, _Inout_ std::unique
     }
 
     // Get the file size
-    LARGE_INTEGER FileSize = { 0 };
+    LARGE_INTEGER FileSize = {};
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
     FILE_STANDARD_INFO fileInfo;

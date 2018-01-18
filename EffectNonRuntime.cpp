@@ -540,7 +540,7 @@ HRESULT SShaderBlock::GetSignatureElementDesc(ESigType SigType, uint32_t Element
         D3D11_SHADER_DESC ShaderDesc;
         VH( pReflectionData->pReflection->GetDesc( &ShaderDesc ) );
 
-        D3D11_SIGNATURE_PARAMETER_DESC ParamDesc ={0};
+        D3D11_SIGNATURE_PARAMETER_DESC ParamDesc ={};
         if( pReflectionData->IsNullGS )
         {
             switch( SigType )
