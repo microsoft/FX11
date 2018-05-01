@@ -8,10 +8,10 @@ February 27, 2018
 Effects for Direct3D 11 (FX11) is a management runtime for authoring HLSL shaders, render
 state, and runtime variables together.
 
-This code is designed to build with Visual Studio 2013 Update 5, Visual Studio 2015 Update 3,
-or Visual Studio 2017. It is recommended that you make use of VS 2015 Update 3, Windows Tools
-1.4.1, and the Windows 10 Anniversary Update SDK (14393) or VS 2017 with the Windows 10
-Fall Creators Update SDK (16299).
+This code is designed to build with Visual Studio 2015 Update 3 or Visual Studio 2017.
+It is recommended that you make use of VS 2015 Update 3, Windows Tools 1.4.1, and the
+Windows 10 Anniversary Update SDK (14393) or VS 2017 (15.5 update) or later with the
+Windows 10 Fall Creators Update SDK (16299).
 
 These components are designed to work without requiring any content from the DirectX SDK. For details,
 see "Where is the DirectX SDK?" <http://msdn.microsoft.com/en-us/library/ee663275.aspx>.
