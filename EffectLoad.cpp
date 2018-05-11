@@ -1783,8 +1783,8 @@ HRESULT CEffectLoader::LoadAssignments( uint32_t Assignments, SAssignment **ppAs
             // Inline shader assignments must be object types
             assert(pAssignment->IsObjectAssignment());
 
-            C_ASSERT( offsetof(SBinaryAssignment::SInlineShader,oShader) == offsetof(SBinaryShaderData5,oShader) );
-            C_ASSERT( offsetof(SBinaryAssignment::SInlineShader,oSODecl) == offsetof(SBinaryShaderData5,oSODecls) );
+            static_assert(offsetof(SBinaryAssignment::SInlineShader, oShader) == offsetof(SBinaryShaderData5, oShader), "ECAT_InlineShader issue");
+            static_assert(offsetof(SBinaryAssignment::SInlineShader, oSODecl) == offsetof(SBinaryShaderData5, oSODecls), "ECAT_InlineShader5 issue");
             if( psAssignments[i].AssignmentType == ECAT_InlineShader )
             {
                 VHD( m_msUnstructured.ReadAtOffset(psAssignments[i].oInitializer, sizeof(*psInlineShader), (void**) &psInlineShader),
@@ -2041,8 +2041,8 @@ HRESULT CEffectLoader::LoadObjectVariables()
                     SBinaryShaderData5 *psInlineShader5;
                 };
 
-                C_ASSERT( offsetof(SBinaryGSSOInitializer,oShader) == 0 );
-                C_ASSERT( offsetof(SBinaryShaderData5,oShader) == 0 );
+                static_assert(offsetof(SBinaryGSSOInitializer, oShader) == 0, "Union issue");
+                static_assert(offsetof(SBinaryShaderData5, oShader) == 0, "Union issue");
 
 
                 pShaderBlock = &m_pEffect->m_pShaderBlocks[m_pEffect->m_ShaderBlockCount];

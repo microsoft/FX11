@@ -205,9 +205,9 @@ struct SType : public ID3DX11EffectType
        Stride(0),
        PackedSize(0)
     {
-        C_ASSERT( sizeof(NumericType) <= sizeof(StructType) );
-        C_ASSERT( sizeof(ObjectType) <= sizeof(StructType) );
-        C_ASSERT( sizeof(InterfaceType) <= sizeof(StructType) );
+        static_assert(sizeof(NumericType) <= sizeof(StructType), "SType union issue");
+        static_assert(sizeof(ObjectType) <= sizeof(StructType), "SType union issue");
+        static_assert(sizeof(InterfaceType) <= sizeof(StructType), "SType union issue");
         ZeroMemory( &StructType, sizeof(StructType) );
     }
 
