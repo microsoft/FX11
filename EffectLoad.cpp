@@ -182,7 +182,10 @@ inline HRESULT VerifyPointer(uint32_t oBase, uint32_t dwSize, uint32_t dwMaxSize
 // A simple class which assists in adding data to a block of memory
 //////////////////////////////////////////////////////////////////////////
 
-CEffectHeap::CEffectHeap() : m_pData(nullptr), m_dwSize(0), m_dwBufferSize(0)
+CEffectHeap::CEffectHeap() noexcept :
+    m_pData(nullptr),
+    m_dwSize(0),
+    m_dwBufferSize(0)
 {
 }
 
@@ -389,6 +392,35 @@ lExit:
 // CEffectLoader
 // A helper class which loads an effect
 //////////////////////////////////////////////////////////////////////////
+
+CEffectLoader::CEffectLoader() noexcept :
+    m_pData(nullptr),
+    m_pHeader(nullptr),
+    m_Version(0),
+    m_pEffect(nullptr),
+    m_pReflection(nullptr),
+    m_dwBufferSize(0),
+    m_pOldVars(nullptr),
+    m_pOldShaders(nullptr),
+    m_pOldDS(nullptr),
+    m_pOldAB(nullptr),
+    m_pOldRS(nullptr),
+    m_pOldCBs(nullptr),
+    m_pOldSamplers(nullptr),
+    m_OldInterfaceCount(0),
+    m_pOldInterfaces(nullptr),
+    m_pOldShaderResources(nullptr),
+    m_pOldUnorderedAccessViews(nullptr),
+    m_pOldRenderTargetViews(nullptr),
+    m_pOldDepthStencilViews(nullptr),
+    m_pOldStrings(nullptr),
+    m_pOldMemberDataBlocks(nullptr),
+    m_pvOldMemberInterfaces(nullptr),
+    m_pOldGroups(nullptr),
+    m_EffectMemory(0),
+    m_ReflectionMemory(0)
+{
+}
 
 _Use_decl_annotations_
 HRESULT CEffectLoader::GetUnstructuredDataBlock(uint32_t offset, uint32_t  *pdwSize, void **ppData)
