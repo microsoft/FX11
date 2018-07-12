@@ -1,26 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Binary\EffectBinaryFormat.h" />
-    <ClInclude Include="Binary\EffectStateBase11.h" />
-    <ClInclude Include="Binary\EffectStates11.h" />
-    <ClInclude Include="Binary\SOParser.h" />
-    <ClInclude Include="inc\d3dx11effect.h" />
-    <ClInclude Include="inc\d3dxGlobal.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="EffectLoad.h" />
-    <ClInclude Include="IUnknownImp.h" />
-    <ClInclude Include="pchfx.h" />
+    <ClInclude Include="inc\d3dx11effect.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\d3dxGlobal.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Binary\EffectBinaryFormat.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectLoad.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Binary\EffectStateBase11.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Binary\EffectStates11.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="IUnknownImp.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="pchfx.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Binary\SOParser.h">
+      <Filter>Src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="d3dxGlobal.cpp" />
-    <ClCompile Include="EffectAPI.cpp" />
-    <ClCompile Include="EffectLoad.cpp" />
-    <ClCompile Include="EffectNonRuntime.cpp" />
-    <ClCompile Include="EffectReflection.cpp" />
-    <ClCompile Include="EffectRuntime.cpp" />
+    <ClCompile Include="d3dxGlobal.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectAPI.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectLoad.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectNonRuntime.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectReflection.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectRuntime.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EffectVariable.inl" />
+    <Filter Include="Inc">
+      <UniqueIdentifier>{e4218cf5-6bc4-4e5c-9b86-6b5510d80244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{a9b5e924-7940-4b53-a9c3-712ee9ca0587}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EffectVariable.inl">
+      <Filter>Src</Filter>
+    </None>
   </ItemGroup>
 </Project>
