@@ -3,12 +3,12 @@
     <metadata minClientVersion="2.8.6">
         <id>fx11_desktop_2015</id>
         <version>0.0.0-SpecifyVersionOnCommandline</version>
-        <title>Effects for Direct3D 11 (VS 2015/VS 2017 Win32)</title>
+        <title>Effects for Direct3D 11 (VS 2015/2017/2019 Win32)</title>
         <authors>Microsoft</authors>
         <owners>microsoft,directxtk</owners>
         <summary>Effects for Direct3D 11 (FX11) is a management runtime for authoring HLSL shaders, render state, and runtime variables together.</summary>
-        <description>This version is for Win32 desktop applications using Visual Studio 2015 Update 3 or Visual Studio 2017.</description>
-        <releaseNotes>Matches the July 12, 2018 release on GitHub.</releaseNotes>
+        <description>This version is for Win32 desktop applications using Visual Studio 2015 Update 3, Visual Studio 2017, or Visual Studio 2019.</description>
+        <releaseNotes>Matches the April 26, 2019 release on GitHub.</releaseNotes>
         <projectUrl>http://go.microsoft.com/fwlink/p/?LinkId=271568</projectUrl>
         <iconUrl>https://github.com/Microsoft/FX11/wiki/X_jpg.jpg</iconUrl>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
