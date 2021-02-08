@@ -6,7 +6,7 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-**June 1, 2020**
+**February 7, 2021**
 
 Effects for Direct3D 11 (FX11) is a management runtime for authoring HLSL shaders, render state, and runtime variables together.
 
@@ -54,5 +54,5 @@ or Windows phone 8.0.
 
 The fx_5_0 profile support in the HLSL compiler is deprecated, and does not fully support DirectX 11.1 HLSL features
 such as minimum precision types. It is supported in the Windows 8.1 SDK version of the HLSL compiler (FXC.EXE) and
-D3DCompile API (46), is supported but generates a deprecation warning with D3DCompile API (47), and could be removed
-in a future update. The fx profiles are not supported by the DXIL (DXC.EXE) compiler.
+D3DCompile API (46), is supported but generates a deprecation warning with D3DCompile API (47). The fx profiles
+are not supported by the DXIL (DXC.EXE) compiler.

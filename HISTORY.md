@@ -4,6 +4,16 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+## February 7, 2021
+* Added CMake project
+* Removed Windows Vista support
+* No code changes
+
+## June 1, 2020
+* Minor update to VS 2019 project
+* Retired VS 2015 projects
+* No code changes
+
 ### April 26, 2019 (11.26)
 * Added VS 2019 desktop projects
 * VS 2017 updated for Windows 10 October 2018 Update SDK (17763)
