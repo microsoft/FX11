@@ -8,7 +8,7 @@
         <owners>microsoft,directxtk</owners>
         <summary>Effects for Direct3D 11 (FX11) is a management runtime for authoring HLSL shaders, render state, and runtime variables together.</summary>
         <description>This version is for Win32 desktop applications using Visual Studio 2017 or Visual Studio 2019.</description>
-        <releaseNotes>Matches the April 26, 2019 release on GitHub.</releaseNotes>
+        <releaseNotes>Matches the February 7, 2021 release on GitHub.</releaseNotes>
         <projectUrl>http://go.microsoft.com/fwlink/p/?LinkId=271568</projectUrl>
         <icon>images\icon.jpg</icon>
         <license type="expression">MIT</license>
@@ -21,7 +21,7 @@
 
         <file target="docs" src="Readme.*" />
 
-        <file target="include" src="Inc\*" />
+        <file target="include" src="Inc\d3dx11effect.h" />
 
         <file target="native\lib\Win32\Debug" src="Bin\Desktop_2017_Win10\Win32\Debug\*.lib" />
         <file target="native\lib\Win32\Debug" src="Bin\Desktop_2017_Win10\Win32\Debug\*.pdb" />
