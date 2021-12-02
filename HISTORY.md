@@ -4,6 +4,9 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+## December 2, 2021
+* Minor project cleanup
+
 ## February 7, 2021
 * Added CMake project
 * Removed Windows Vista support
