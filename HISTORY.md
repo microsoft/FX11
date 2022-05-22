@@ -4,6 +4,11 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+## May 22, 2022 (11.27)
+* Add VS 2022 projects, retired VS 2017 projects
+* Update build switches for SDL recommendations
+* CMake project cleanup, added CMakePresets.json
+
 ## December 2, 2021
 * Minor project cleanup
 

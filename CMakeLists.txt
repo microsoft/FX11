@@ -3,7 +3,7 @@
 
 cmake_minimum_required (VERSION 3.13)
 
-set(FX_VERSION 11.26)
+set(FX_VERSION 11.27)
 
 project (Effects11
   VERSION ${FX_VERSION}
