@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required (VERSION 3.13)
 
 set(FX_VERSION 11.26)
 
@@ -23,7 +23,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/CMake")
 
 if (DEFINED VCPKG_TARGET_ARCHITECTURE)
     set(DIRECTX_ARCH ${VCPKG_TARGET_ARCHITECTURE})
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Ww][Ii][Nn]32$")
+    set(DIRECTX_ARCH x86)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Xx]64$")
+    set(DIRECTX_ARCH x64)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]$")
+    set(DIRECTX_ARCH arm)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]64$")
+    set(DIRECTX_ARCH arm64)
 endif()
+
+include(GNUInstallDirs)
 
 #--- Library
 set(LIBRARY_HEADERS
@@ -56,7 +66,7 @@ endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
-  $<INSTALL_INTERFACE:include>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>
   PRIVATE Binary/)
 
 if(MSVC)
@@ -74,32 +84,32 @@ include(CMakePackageConfigHelpers)
 string(TOLOWER ${PROJECT_NAME} PACKAGE_NAME)
 
 write_basic_package_version_file(
-  ${PROJECT_BINARY_DIR}/cmake/${PACKAGE_NAME}-config-version.cmake
+  ${PACKAGE_NAME}-config-version.cmake
   VERSION ${FX_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(TARGETS ${PROJECT_NAME}
   EXPORT ${PROJECT_NAME}-targets
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin)
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-config.cmake.in
-  ${PROJECT_BINARY_DIR}/cmake/${PACKAGE_NAME}-config.cmake
-  INSTALL_DESTINATION cmake/})
+  ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}-config.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PACKAGE_NAME}/cmake/)
 
 install(EXPORT ${PROJECT_NAME}-targets
   FILE ${PROJECT_NAME}-targets.cmake
   NAMESPACE Microsoft::
-  DESTINATION cmake/)
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PACKAGE_NAME}/cmake/)
 
 install(FILES inc/d3dx11effect.h
-    DESTINATION include)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
 install(FILES
-    ${PROJECT_BINARY_DIR}/cmake/${PACKAGE_NAME}-config.cmake
-    ${PROJECT_BINARY_DIR}/cmake/${PACKAGE_NAME}-config-version.cmake
-  DESTINATION cmake/)
+    ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}-config-version.cmake
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PACKAGE_NAME}/cmake/)
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /fp:fast)
