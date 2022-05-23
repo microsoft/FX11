@@ -13,7 +13,7 @@ project (Effects11
 
 option(ENABLE_CODE_ANALYSIS "Use Static Code Analysis on build" OFF)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -114,11 +114,18 @@ install(FILES
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /fp:fast)
 
-    if((${CMAKE_SIZEOF_VOID_P} EQUAL 4) AND (NOT ${DIRECTX_ARCH} MATCHES "arm"))
+    if((${CMAKE_SIZEOF_VOID_P} EQUAL 4) AND (NOT ${DIRECTX_ARCH} MATCHES "^arm"))
         target_compile_options(${PROJECT_NAME} PRIVATE /arch:SSE2)
     endif()
 endif()
 
+
+if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+    set(WarningsLib "-Wno-microsoft-exception-spec" "-Wno-microsoft-goto" "-Wno-switch"
+        "-Wno-unused-value" "-Wno-unused-function" "-Wno-dynamic-class-memaccess"
+        "-Wno-tautological-constant-out-of-range-compare" "-Wno-invalid-offsetof")
+    target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsLib})
+endif()
 if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
     target_compile_options(${PROJECT_NAME} PRIVATE /wd5205 /JMC- /Zc:__cplusplus)
 
