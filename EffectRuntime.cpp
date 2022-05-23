@@ -640,7 +640,7 @@ void CEffect::IncrementTimer()
     m_LocalTimer++;
 
 #if !defined(_M_X64) && !defined(_M_ARM64)
-#if _DEBUG
+#ifdef _DEBUG
     if (m_LocalTimer > g_TimerRolloverCount)
     {
         DPF(0, "Rolling over timer (current time: %zu, rollover cap: %u).", m_LocalTimer, g_TimerRolloverCount);
