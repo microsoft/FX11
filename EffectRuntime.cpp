@@ -5,7 +5,7 @@
 // These functions are expected to be called at high frequency
 // (when applying a pass).
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/p/?LinkId=271568

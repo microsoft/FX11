@@ -70,6 +70,17 @@
         "strategy": "external"
       }
     },
+    {
+      "name": "Clang",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang-cl.exe"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      }
+    },
 
     {
       "name": "UWP",
@@ -80,12 +91,12 @@
       "hidden": true
     },
 
-    { "name": "x64-Debug"        , "description": "MSVC for x64 (Debug) for Windows 10", "inherits": [ "base", "x64", "Debug", "MSVC" ] },
-    { "name": "x64-Release"      , "description": "MSVC for x64 (Release) for Windows 10", "inherits": [ "base", "x64", "Release", "MSVC" ] },
-    { "name": "x86-Debug"        , "description": "MSVC for x86 (Debug) for Windows 10", "inherits": [ "base", "x86", "Debug", "MSVC" ] },
-    { "name": "x86-Release"      , "description": "MSVC for x86 (Release) for Windows 10", "inherits": [ "base", "x86", "Release", "MSVC" ] },
-    { "name": "arm64-Debug"      , "description": "MSVC for ARM64 (Debug) for Windows 10", "inherits": [ "base", "ARM64", "Debug", "MSVC" ] },
-    { "name": "arm64-Release"    , "description": "MSVC for ARM64 (Release) for Windows 10", "inherits": [ "base", "ARM64", "Release", "MSVC" ] },
+    { "name": "x64-Debug"        , "description": "MSVC for x64 (Debug)", "inherits": [ "base", "x64", "Debug", "MSVC" ] },
+    { "name": "x64-Release"      , "description": "MSVC for x64 (Release)", "inherits": [ "base", "x64", "Release", "MSVC" ] },
+    { "name": "x86-Debug"        , "description": "MSVC for x86 (Debug)", "inherits": [ "base", "x86", "Debug", "MSVC" ] },
+    { "name": "x86-Release"      , "description": "MSVC for x86 (Release)", "inherits": [ "base", "x86", "Release", "MSVC" ] },
+    { "name": "arm64-Debug"      , "description": "MSVC for ARM64 (Debug)", "inherits": [ "base", "ARM64", "Debug", "MSVC" ] },
+    { "name": "arm64-Release"    , "description": "MSVC for ARM64 (Release)", "inherits": [ "base", "ARM64", "Release", "MSVC" ] },
 
     { "name": "x64-Debug-UWP"    , "description": "MSVC for x64 (Debug) for UWP", "inherits": [ "base", "x64", "Debug", "MSVC", "UWP" ] },
     { "name": "x64-Release-UWP"  , "description": "MSVC for x64 (Release) for UWP", "inherits": [ "base", "x64", "Release", "MSVC", "UWP" ] },
@@ -94,6 +105,11 @@
     { "name": "arm-Debug-UWP"    , "description": "MSVC for ARM (Debug) for UWP", "inherits": [ "base", "ARM", "Debug", "MSVC", "UWP" ] },
     { "name": "arm-Release-UWP"  , "description": "MSVC for ARM (Release) for UWP", "inherits": [ "base", "ARM", "Release", "MSVC", "UWP" ] },
     { "name": "arm64-Debug-UWP"  , "description": "MSVC for ARM64 (Debug) for UWP", "inherits": [ "base", "ARM64", "Debug", "MSVC", "UWP" ] },
-    { "name": "arm64-Release-UWP", "description": "MSVC for ARM64 (Release) for UWP", "inherits": [ "base", "ARM64", "Release", "MSVC", "UWP" ] }
+    { "name": "arm64-Release-UWP", "description": "MSVC for ARM64 (Release) for UWP", "inherits": [ "base", "ARM64", "Release", "MSVC", "UWP" ] },
+
+    { "name": "x64-Debug-Clang"    , "description": "Clang/LLVM for x64 (Debug)", "inherits": [ "base", "x64", "Debug", "Clang" ] },
+    { "name": "x64-Release-Clang"  , "description": "Clang/LLVM for x64 (Release)", "inherits": [ "base", "x64", "Release", "Clang" ] },
+    { "name": "x86-Debug-Clang"    , "description": "Clang/LLVM for x86 (Debug)", "inherits": [ "base", "x86", "Debug", "Clang" ], "environment": { "CXXFLAGS": "-m32" } },
+    { "name": "x86-Release-Clang"  , "description": "Clang/LLVM for x86 (Release)", "inherits": [ "base", "x86", "Release", "Clang" ], "environment": { "CXXFLAGS": "-m32" } }
   ]
 }
