@@ -76,6 +76,17 @@
         "strategy": "external"
       }
     },
+    {
+      "name": "GNUC",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++.exe"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      }
+    },
 
     {
       "name": "UWP",
@@ -103,6 +114,11 @@
     { "name": "x64-Debug-Clang"    , "description": "Clang/LLVM for x64 (Debug)", "inherits": [ "base", "x64", "Debug", "Clang" ] },
     { "name": "x64-Release-Clang"  , "description": "Clang/LLVM for x64 (Release)", "inherits": [ "base", "x64", "Release", "Clang" ] },
     { "name": "x86-Debug-Clang"    , "description": "Clang/LLVM for x86 (Debug)", "inherits": [ "base", "x86", "Debug", "Clang" ], "environment": { "CXXFLAGS": "-m32" } },
-    { "name": "x86-Release-Clang"  , "description": "Clang/LLVM for x86 (Release)", "inherits": [ "base", "x86", "Release", "Clang" ], "environment": { "CXXFLAGS": "-m32" } }
+    { "name": "x86-Release-Clang"  , "description": "Clang/LLVM for x86 (Release)", "inherits": [ "base", "x86", "Release", "Clang" ], "environment": { "CXXFLAGS": "-m32" } },
+
+    { "name": "x64-Debug-MinGW"  , "description": "MinG-W64 (Debug)", "inherits": [ "base", "x64", "Debug", "GNUC" ], "environment": { "PATH": "$penv{PATH};c:/mingw64/bin" } },
+    { "name": "x64-Release-MinGW", "description": "MinG-W64 (Release)", "inherits": [ "base", "x64", "Release", "GNUC" ], "environment": { "PATH": "$penv{PATH};c:/mingw64/bin" } },
+    { "name": "x86-Debug-MinGW"  , "description": "MinG-W32 (Debug)", "inherits": [ "base", "x86", "Debug", "GNUC" ], "environment": { "PATH": "$penv{PATH};c:/mingw32/bin" } },
+    { "name": "x86-Release-MinGW", "description": "MinG-W32 (Release)", "inherits": [ "base", "x86", "Release", "GNUC" ], "environment": { "PATH": "$penv{PATH};c:/mingw32/bin" } }
   ]
 }
