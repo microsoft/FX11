@@ -73,7 +73,9 @@ set(LIBRARY_SOURCES
 
 add_library(${PROJECT_NAME} STATIC ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE pchfx.h)
+if (NOT MINGW)
+    target_precompile_headers(${PROJECT_NAME} PRIVATE pchfx.h)
+endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
