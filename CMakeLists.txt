@@ -126,8 +126,7 @@ if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
         "-Wno-unused-value" "-Wno-unused-function" "-Wno-dynamic-class-memaccess"
         "-Wno-tautological-constant-out-of-range-compare" "-Wno-invalid-offsetof")
     target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsLib})
-endif()
-if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
+elseif ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
     target_compile_options(${PROJECT_NAME} PRIVATE /wd5205 /JMC- /Zc:__cplusplus)
 
     if(ENABLE_CODE_ANALYSIS)
