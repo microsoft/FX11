@@ -38,6 +38,10 @@ Documentation is available on the [GitHub wiki](https://github.com/Microsoft/FX1
 
 All content and source code for this package are subject to the terms of the [MIT License](https://github.com/microsoft/FX11/blob/main/LICENSE).
 
+## Release Notes
+
+* The library can be built with Visual C++ or with clang/LLVM for Windows. The code is not conformant enough to support the GNUC (MinGW) compiler.
+
 ## Support
 
 For questions, consider using [Stack Overflow](https://stackoverflow.com/questions/tagged/d3dx) with the *d3dx* tag.
