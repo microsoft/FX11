@@ -1,0 +1,99 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+#
+# http://go.microsoft.com/fwlink/?LinkId=271568
+
+# Builds the library for Windows Desktop.
+
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+    trigger:
+      branches:
+        include:
+        - main
+      paths:
+        exclude:
+        - README.md
+        - HISTORY.md
+        - SECURITY.md
+
+name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
+
+pool:
+  vmImage: windows-2019
+
+jobs:
+- job: DESKTOP_BUILD
+  displayName: 'Win32 Desktop'
+  timeoutInMinutes: 60
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 32dbg
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: Win32
+      configuration: Debug
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 32rel
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: Win32
+      configuration: Release
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 64dbg
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x64
+      configuration: Debug
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 64rel
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x64
+      configuration: Release
+
+- job: DESKTOP_BUILD_SPECTRE
+  displayName: 'Win32 Desktop (Spectre-mitigated)'
+  timeoutInMinutes: 60
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 32dbg
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
+      platform: Win32
+      configuration: Debug
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 32rel
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
+      platform: Win32
+      configuration: Release
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 64dbg
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
+      platform: x64
+      configuration: Debug
+  - task: VSBuild@1
+    displayName: Build solution Effects11_2019_Win10.sln 64rel
+    inputs:
+      solution: Effects11_2019_Win10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
+      platform: x64
+      configuration: Release
