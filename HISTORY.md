@@ -4,6 +4,10 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+## December 10, 2022 (11.29)
+* CMake project updated to require 3.20 or later
+* Added Azure Dev Ops Pipeline YAML files
+
 ## August 17, 2022 (11.28)
 * CMake and MSBuild project updates
 
