@@ -5,20 +5,26 @@
 
 # Builds the library using CMake.
 
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - CMakeLists.txt
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - CMakeLists.txt
+
 resources:
   repositories:
   - repository: self
     type: git
     ref: refs/heads/main
-    trigger:
-      branches:
-        include:
-        - main
-      paths:
-        exclude:
-        - README.md
-        - HISTORY.md
-        - SECURITY.md
 
 name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
 
