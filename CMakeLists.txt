@@ -127,7 +127,7 @@ else()
 endif()
 
 if(NOT ${DIRECTX_ARCH} MATCHES "^arm")
-    if(${CMAKE_SIZEOF_VOID_P} EQUAL "4")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
         set(ARCH_SSE2 $<$<CXX_COMPILER_ID:MSVC>:/arch:SSE2> $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
     else()
         set(ARCH_SSE2 $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
@@ -149,6 +149,11 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
       target_compile_options(${PROJECT_NAME} PRIVATE /analyze)
     endif()
 
+    if(CMAKE_INTERPROCEDURAL_OPTIMIZATION)
+      message(STATUS "Building using Whole Program Optimization")
+      target_compile_options(${PROJECT_NAME} PRIVATE /Gy /Gw)
+    endif()
+
     if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.24)
         target_compile_options(${PROJECT_NAME} PRIVATE /ZH:SHA_256)
     endif()
@@ -163,6 +168,10 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
 
     if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.34)
         target_compile_options(${PROJECT_NAME} PRIVATE /wd5262)
+    endif()
+
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.35)
+        target_compile_options(${PROJECT_NAME} PRIVATE /Zc:checkGwOdr)
     endif()
 endif()
 
