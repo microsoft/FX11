@@ -4,27 +4,30 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
-## December 10, 2022 (11.29)
+### June 13, 2023
+* CMake project updates
+
+### December 10, 2022 (11.29)
 * CMake project updated to require 3.20 or later
 * Added Azure Dev Ops Pipeline YAML files
 
-## August 17, 2022 (11.28)
+### August 17, 2022 (11.28)
 * CMake and MSBuild project updates
 
-## May 23, 2022 (11.27)
+### May 23, 2022 (11.27)
 * Add VS 2022 projects, retired VS 2017 projects
 * Update build switches for SDL recommendations
 * CMake project cleanup, added CMakePresets.json
 
-## December 2, 2021
+### December 2, 2021
 * Minor project cleanup
 
-## February 7, 2021
+### February 7, 2021
 * Added CMake project
 * Removed Windows Vista support
 * No code changes
 
-## June 1, 2020
+### June 1, 2020
 * Minor update to VS 2019 project
 * Retired VS 2015 projects
 * No code changes
