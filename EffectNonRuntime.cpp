@@ -1310,7 +1310,7 @@ HRESULT CEffect::BindToDevice(ID3D11Device *pDevice, LPCSTR srcName)
         {
             if( m_pVariables[i].pType->IsClassInstance() )
             {
-                for (uint32_t j = 0; j < std::max<size_t>(m_pVariables[i].pType->Elements,1); ++j)
+                for (size_t j = 0; j < std::max<size_t>(m_pVariables[i].pType->Elements,1); ++j)
                 {
                     assert( CurMemberData < m_MemberDataCount );
                     ID3D11ClassInstance** ppCI = &(m_pVariables[i].pMemberData + j)->Data.pD3DClassInstance;
@@ -1319,7 +1319,7 @@ HRESULT CEffect::BindToDevice(ID3D11Device *pDevice, LPCSTR srcName)
                     if( m_pVariables[i].pType->TotalSize > 0 )
                     {
                         // ignore failures in GetClassInstance;
-                        m_pClassLinkage->GetClassInstance( m_pVariables[i].pName, j, ppCI );
+                        m_pClassLinkage->GetClassInstance( m_pVariables[i].pName, static_cast<UINT>(j), ppCI );
                     }
                     else
                     {
