@@ -10,15 +10,18 @@ trigger:
     include:
     - main
   paths:
-    include:
-    - CMakeLists.txt
+    exclude:
+    - '*.md'
+    - LICENSE
+
 pr:
   branches:
     include:
     - main
   paths:
-    include:
-    - CMakeLists.txt
+    exclude:
+    - '*.md'
+    - LICENSE
 
 resources:
   repositories:
@@ -29,6 +32,7 @@ resources:
 name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
 
 variables:
+  Codeql.Enabled: false
   VS_GENERATOR: 'Visual Studio 16 2019'
   WIN10_SDK: '10.0.19041.0'
 

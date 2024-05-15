@@ -5,8 +5,24 @@
 
 # Builds the library using CMake.
 
-trigger: none
-pr: none
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - '*.md'
+    - LICENSE
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - '*.md'
+    - LICENSE
+  drafts: false
 
 resources:
   repositories:
@@ -17,6 +33,7 @@ resources:
 name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
 
 variables:
+  Codeql.Enabled: false
   VS_GENERATOR: 'Visual Studio 17 2022'
   WIN11_SDK: '10.0.22000.0'
 

@@ -6,7 +6,14 @@
 # Builds the library for Windows Desktop.
 
 trigger: none
-pr: none
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - build/FX11-GitHub-Dev17.yml
 
 resources:
   repositories:
@@ -15,6 +22,9 @@ resources:
     ref: refs/heads/main
 
 name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
+
+variables:
+  Codeql.Enabled: false
 
 pool:
   vmImage: windows-2022
