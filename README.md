@@ -40,6 +40,10 @@ All content and source code for this package are subject to the terms of the [MI
 
 ## Release Notes
 
+FOR SECURITY ADVISORIES, see [GitHub](https://github.com/microsoft/FX11/security/advisories).
+
+For a full change history, see [CHANGELOG.md](https://github.com/microsoft/FX11/blob/main/CHANGELOG.md).
+
 * The library can be built with Visual C++ or with clang/LLVM for Windows. The code is not conformant enough to support the GNUC (MinGW) compiler.
 
 ## Support

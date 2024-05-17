@@ -2476,7 +2476,9 @@ HRESULT CEffectLoader::LoadAnnotations(uint32_t  *pcAnnotations, SAnnotation **p
         
         // we allocate raw bytes for annotations because they are polymorphic types that need to be placement new'ed
         VN( pAnnotations = (SAnnotation *) PRIVATENEW uint8_t[annotationsSize] );
-        
+
+        memset(pAnnotations, 0, annotationsSize);
+
         for (i=0; i<cAnnotations; i++)
         {
             SBinaryAnnotation *psAnnotation;

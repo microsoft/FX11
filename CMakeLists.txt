@@ -159,7 +159,7 @@ elseif( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
     target_compile_options(${PROJECT_NAME} PRIVATE /wd5205 /sdl /JMC- /Zc:__cplusplus /Zc:inline)
 
     if(ENABLE_CODE_ANALYSIS)
-      target_compile_options(${PROJECT_NAME} PRIVATE /analyze)
+      target_compile_options(${PROJECT_NAME} PRIVATE /analyze /WX)
     endif()
 
     if(CMAKE_INTERPROCEDURAL_OPTIMIZATION)
