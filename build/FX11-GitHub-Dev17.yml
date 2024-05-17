@@ -5,15 +5,28 @@
 
 # Builds the library for Windows Desktop.
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - '*.md'
+    - LICENSE
+    - CMake*
+    - build/*.in
 
 pr:
   branches:
     include:
     - main
   paths:
-    include:
-    - build/FX11-GitHub-Dev17.yml
+    exclude:
+    - '*.md'
+    - LICENSE
+    - CMake*
+    - build/*.in
+  drafts: false
 
 resources:
   repositories:
@@ -107,5 +120,62 @@ jobs:
       solution: Effects11_2022_Win10.sln
       msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
       platform: x64
+      configuration: Release
+      msbuildArchitecture: x64
+
+- job: UWP_BUILD
+  displayName: 'Universal Windows Platform (UWP)'
+  timeoutInMinutes: 120
+  cancelTimeoutInMinutes: 1
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln 32dbg
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x86
+      configuration: Debug
+      msbuildArchitecture: x64
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln 32rel
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x86
+      configuration: Release
+      msbuildArchitecture: x64
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln 64dbg
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x64
+      configuration: Debug
+      msbuildArchitecture: x64
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln 64rel
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: x64
+      configuration: Release
+      msbuildArchitecture: x64
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln arm64dbg
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: ARM64
+      configuration: Debug
+      msbuildArchitecture: x64
+  - task: VSBuild@1
+    displayName: Build solution Effects11_Windows10.sln arm64rel
+    inputs:
+      solution: Effects11_Windows10.sln
+      msbuildArgs: /p:PreferredToolArchitecture=x64
+      platform: ARM64
       configuration: Release
       msbuildArchitecture: x64
