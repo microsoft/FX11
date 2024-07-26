@@ -11,7 +11,15 @@
 
 #pragma once
 
-#pragma warning(disable : 4102 4127 4201 4505 4616 4706 6326)
+#pragma warning(disable : 4619 4616 4102 4127 4201 4505 4706 5205 6326)
+// C4619/4616 #pragma warning warnings
+// C4102 The label is defined but never referenced. The compiler ignores the label.
+// C4127 conditional expression is constant
+// C4201 nonstandard extension used : nameless struct/union
+// C4505 unreferenced function with internal linkage has been removed
+// C4706 assignment within conditional expression
+// C5205 delete of an abstract class 'X' that has a non-virtual destructor results in undefined behavior
+// C6326 Potential comparison of a constant with another constant
 
 #ifndef NOMINMAX
 #define NOMINMAX
