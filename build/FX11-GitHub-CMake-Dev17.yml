@@ -13,6 +13,7 @@ trigger:
     exclude:
     - '*.md'
     - LICENSE
+    - '.github/*'
 
 pr:
   branches:
@@ -22,6 +23,7 @@ pr:
     exclude:
     - '*.md'
     - LICENSE
+    - '.github/*'
   drafts: false
 
 resources:

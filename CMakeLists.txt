@@ -26,26 +26,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-if(DEFINED VCPKG_TARGET_ARCHITECTURE)
-    set(DIRECTX_ARCH ${VCPKG_TARGET_ARCHITECTURE})
-elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Ww][Ii][Nn]32$")
-    set(DIRECTX_ARCH x86)
-elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Xx]64$")
-    set(DIRECTX_ARCH x64)
-elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]$")
-    set(DIRECTX_ARCH arm)
-elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]64$")
-    set(DIRECTX_ARCH arm64)
-elseif(CMAKE_VS_PLATFORM_NAME_DEFAULT MATCHES "^[Ww][Ii][Nn]32$")
-    set(DIRECTX_ARCH x86)
-elseif(CMAKE_VS_PLATFORM_NAME_DEFAULT MATCHES "^[Xx]64$")
-    set(DIRECTX_ARCH x64)
-elseif(CMAKE_VS_PLATFORM_NAME_DEFAULT MATCHES "^[Aa][Rr][Mm]$")
-    set(DIRECTX_ARCH arm)
-elseif(CMAKE_VS_PLATFORM_NAME_DEFAULT MATCHES "^[Aa][Rr][Mm]64$")
-    set(DIRECTX_ARCH arm64)
-endif()
-
 include(GNUInstallDirs)
 
 #--- Library
@@ -116,88 +96,49 @@ install(FILES
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PACKAGE_NAME})
 
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /GR- /fp:fast "$<$<NOT:$<CONFIG:DEBUG>>:/guard:cf>")
-
-    if(ENABLE_SPECTRE_MITIGATION
-       AND (MSVC_VERSION GREATER_EQUAL 1913)
-       AND (NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang")))
-      message(STATUS "Building Spectre-mitigated libraries.")
-      target_compile_options(${PROJECT_NAME} PRIVATE "/Qspectre")
-    endif()
-
-    if((MSVC_VERSION GREATER_EQUAL 1924)
-       AND ((NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang")) OR (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 16.0)))
-      target_compile_options(${PROJECT_NAME} PRIVATE /ZH:SHA_256)
-    endif()
-
-    if((MSVC_VERSION GREATER_EQUAL 1928)
-       AND (CMAKE_SIZEOF_VOID_P EQUAL 8)
-       AND ((NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang")) OR (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0)))
-      target_compile_options(${PROJECT_NAME} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:/guard:ehcont>")
-    endif()
-else()
-    target_compile_definitions(${PROJECT_NAME} PRIVATE $<IF:$<CONFIG:DEBUG>,_DEBUG,NDEBUG>)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /EHsc /GR-)
 endif()
 
-if(NOT ${DIRECTX_ARCH} MATCHES "^arm")
-    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-        set(ARCH_SSE2 $<$<CXX_COMPILER_ID:MSVC>:/arch:SSE2> $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
-    else()
-        set(ARCH_SSE2 $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
-    endif()
+include(build/CompilerAndLinker.cmake)
 
-    target_compile_options(${PROJECT_NAME} PRIVATE ${ARCH_SSE2})
-endif()
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${COMPILER_DEFINES})
+target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILER_SWITCHES})
+target_link_options(${PROJECT_NAME} PRIVATE ${LINKER_SWITCHES})
 
-if( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|IntelLLVM")
     set(WarningsLib "-Wno-microsoft-exception-spec" "-Wno-microsoft-goto" "-Wno-switch"
         "-Wno-unused-value" "-Wno-unused-function" "-Wno-dynamic-class-memaccess"
         "-Wno-tautological-constant-out-of-range-compare" "-Wno-invalid-offsetof")
     target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsLib})
 elseif( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
-    # /permissive- doesn't work on this legacy codebase.
-    target_compile_options(${PROJECT_NAME} PRIVATE /wd5205 /sdl /JMC- /Zc:__cplusplus /Zc:inline)
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.34)
+      target_compile_options(${PROJECT_NAME} PRIVATE /wd5262)
+    endif()
 
     if(ENABLE_CODE_ANALYSIS)
       target_compile_options(${PROJECT_NAME} PRIVATE /analyze /WX)
     endif()
 
-    if(CMAKE_INTERPROCEDURAL_OPTIMIZATION)
-      message(STATUS "Building using Whole Program Optimization")
-      target_compile_options(${PROJECT_NAME} PRIVATE /Gy /Gw)
-    endif()
-
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.26)
-        target_compile_options(${PROJECT_NAME} PRIVATE /Zc:preprocessor /wd5104 /wd5105)
-    endif()
-
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.28)
-        target_compile_options(${PROJECT_NAME} PRIVATE /Zc:lambda)
-    endif()
-
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.34)
-        target_compile_options(${PROJECT_NAME} PRIVATE /wd5262)
-    endif()
-
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.35)
-        target_compile_options(${PROJECT_NAME} PRIVATE /Zc:checkGwOdr)
+    if(ENABLE_SPECTRE_MITIGATION
+       AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.13))
+        message(STATUS "Building Spectre-mitigated libraries")
+        target_compile_options(${PROJECT_NAME} PRIVATE "/Qspectre")
     endif()
 endif()
 
 if(WIN32)
-    if(WINDOWS_STORE)
-      target_compile_definitions(${PROJECT_NAME} PRIVATE WINAPI_FAMILY=WINAPI_FAMILY_APP)
-    endif()
-
     if(WINDOWS_STORE OR (${DIRECTX_ARCH} MATCHES "^arm64"))
+        message(STATUS "Building for Windows 10/Windows 11.")
         set(WINVER 0x0A00)
     elseif(${DIRECTX_ARCH} MATCHES "^arm")
+        message(STATUS "Building for Windows 8.")
         set(WINVER 0x0602)
     else()
+        message(STATUS "Building for Windows 7.")
         set(WINVER 0x0601)
     endif()
 
-    target_compile_definitions(${PROJECT_NAME} PRIVATE _UNICODE UNICODE _WIN32_WINNT=${WINVER})
+    target_compile_definitions(${PROJECT_NAME} PRIVATE _WIN32_WINNT=${WINVER})
 
     if(DISABLE_MSVC_ITERATOR_DEBUGGING)
       target_compile_definitions(${PROJECT_NAME} PRIVATE _ITERATOR_DEBUG_LEVEL=0)
