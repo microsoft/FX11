@@ -1,0 +1,47 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+#
+# http://go.microsoft.com/fwlink/?LinkId=271568
+
+name: MSBuild
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '*.md'
+      - LICENSE
+      - '.nuget/*'
+      - build/*.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-${{ matrix.vs }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        vs: [2019, 2022]
+        build_type: [Debug, Release]
+        platform: [Win32, x64]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build
+      working-directory: ${{ github.workspace }}
+      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platform }} ./Effects11_${{ matrix.vs }}_Win10.sln
+
+    - if: matrix.vs == '2022'
+      name: 'Build (UWP)'
+      working-directory: ${{ github.workspace }}
+      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platform }} ./Effects11_Windows10.sln
