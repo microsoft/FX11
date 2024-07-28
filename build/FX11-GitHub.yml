@@ -5,32 +5,22 @@
 
 # Builds the library for Windows Desktop.
 
-trigger:
+schedules:
+- cron: "15 5 * * *"
+  displayName: 'Nightly build'
   branches:
     include:
     - main
-  paths:
-    exclude:
-    - '*.md'
-    - LICENSE
-    - '.github/*'
-    - CMake*
-    - build/*.cmake
-    - build/*.in
 
+# GitHub Actions handles MSBuild for CI/PR
+trigger: none
 pr:
   branches:
     include:
     - main
   paths:
-    exclude:
-    - '*.md'
-    - LICENSE
-    - '.github/*'
-    - CMake*
-    - build/*.cmake
-    - build/*.in
-  drafts: false
+    include:
+    - build/FX11-GitHub.yml
 
 resources:
   repositories:
