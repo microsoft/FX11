@@ -29,7 +29,7 @@ jobs:
       matrix:
         vs: [2019, 2022]
         build_type: [Debug, Release]
-        platform: [Win32, x64]
+        platformx: [Win32, x64]
 
     steps:
     - uses: actions/checkout@v4
@@ -39,14 +39,14 @@ jobs:
 
     - name: Build
       working-directory: ${{ github.workspace }}
-      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platform }} ./Effects11_${{ matrix.vs }}_Win10.sln
+      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platformx }} ./Effects11_${{ matrix.vs }}_Win10.sln
 
-    - if: (matrix.vs == '2022' && matrix.platform != 'Win32')
+    - if: (matrix.vs == '2022' && matrix.platformx != 'Win32')
       name: 'Build (UWP) x64'
       working-directory: ${{ github.workspace }}
-      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platform }} ./Effects11_Windows10.sln
+      run: msbuild /m /p:Configuration=${{ matrix.build_type }} /p:Platform=${{ matrix.platformx }} ./Effects11_Windows10.sln
 
-    - if: (matrix.vs == '2022' && matrix.platform == 'Win32')
+    - if: (matrix.vs == '2022' && matrix.platformx == 'Win32')
       name: 'Build (UWP) x86'
       working-directory: ${{ github.workspace }}
       run: msbuild /m /p:Configuration=x86 ./Effects11_Windows10.sln
