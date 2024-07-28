@@ -49,4 +49,4 @@ jobs:
     - if: (matrix.vs == '2022' && matrix.platform == 'Win32')
       name: 'Build (UWP) x86'
       working-directory: ${{ github.workspace }}
-      run: msbuild /m /p:Configuration=x86 /p:Platform=${{ matrix.platform }} ./Effects11_Windows10.sln
+      run: msbuild /m /p:Configuration=x86 ./Effects11_Windows10.sln
