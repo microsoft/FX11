@@ -680,7 +680,12 @@ static uint32_t ComputeHash(_In_reads_bytes_(cbToHash) const uint8_t *pb, _In_ u
 
     c += cbToHash;
 
-    switch(cbLeft) // all the case statements fall through
+#ifdef _PREFAST_
+#pragma prefast(push)
+#pragma prefast(disable:26819, "all the case statements fall through")
+#endif
+
+    switch(cbLeft)
     {
     case 11: c+=((uint32_t) pb[10] << 24);
     case 10: c+=((uint32_t) pb[9]  << 16);
@@ -695,6 +700,10 @@ static uint32_t ComputeHash(_In_reads_bytes_(cbToHash) const uint8_t *pb, _In_ u
     case 2 : a+=((uint32_t) pb[1]  <<  8);
     case 1 : a+=pb[0];
     }
+
+#ifdef _PREFAST_
+#pragma prefast(pop)
+#endif
 
     HASH_MIX(a,b,c);
 
@@ -733,7 +742,12 @@ static uint32_t ComputeHashLower(_In_reads_bytes_(cbToHash) const uint8_t *pb, _
     for( size_t i = 0; i < cbLeft; i++ )
         pbT[i] = (uint8_t)tolower(pb[i]);
 
-    switch(cbLeft) // all the case statements fall through
+#ifdef _PREFAST_
+#pragma prefast(push)
+#pragma prefast(disable:26819, "all the case statements fall through")
+#endif
+
+    switch(cbLeft)
     {
     case 11: c+=((uint32_t) pbT[10] << 24);
     case 10: c+=((uint32_t) pbT[9]  << 16);
@@ -748,6 +762,10 @@ static uint32_t ComputeHashLower(_In_reads_bytes_(cbToHash) const uint8_t *pb, _
     case 2 : a+=((uint32_t) pbT[1]  <<  8);
     case 1 : a+=pbT[0];
     }
+
+#ifdef _PREFAST_
+#pragma prefast(pop)
+#endif
 
     HASH_MIX(a,b,c);
 

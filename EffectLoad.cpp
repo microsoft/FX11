@@ -1913,6 +1913,14 @@ HRESULT CEffectLoader::LoadAssignments( uint32_t Assignments, SAssignment **ppAs
                 VBD( psInlineShader->oSODecl == 0, "Internal loading error: compute shaders cannot have stream out decls." );
                 break;
 
+            #if (__cplusplus >= 201703L)
+                [[fallthrough]];
+            #elif defined(__clang__)
+                [[clang::fallthrough]];
+            #elif defined(_MSC_VER)
+                __fallthrough;
+            #endif
+
             case ELHS_GeometryShaderSO:
                 assert(0); // Should never happen
 
