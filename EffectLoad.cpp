@@ -1916,6 +1916,14 @@ HRESULT CEffectLoader::LoadAssignments( uint32_t Assignments, SAssignment **ppAs
             case ELHS_GeometryShaderSO:
                 assert(0); // Should never happen
 
+            #if (__cplusplus >= 201703L)
+                [[fallthrough]];
+            #elif defined(__clang__)
+                [[clang::fallthrough]];
+            #elif defined(_MSC_VER)
+                __fallthrough;
+            #endif
+
             default:
                 VHD( E_FAIL, "Internal loading error: invalid shader type."  );
             }
