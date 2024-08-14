@@ -4,6 +4,12 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+### August 14, 2024 (11.30)
+* Minor code cleanup
+* Retired ARM (32-bit) support for the UWP platform
+* CMake project updates, refactor, and added ARM64EC support
+* Added GitHub Action Pipeline YAML files
+
 ### June 13, 2023
 * CMake project updates
 
