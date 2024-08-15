@@ -22,7 +22,7 @@
 // C6326 Potential comparison of a constant with another constant
 
 #ifndef NOMINMAX
-#define NOMINMAX
+#define NOMINMAX 1
 #endif
 
 #include <algorithm>
@@ -51,6 +51,13 @@
 //////////////////////////////////////////////////////////////////////////
 
 #define offsetof_fx( a, b ) (uint32_t)offsetof( a, b )
+
+#ifdef _DEBUG
+extern void __cdecl D3DXDebugPrintf(UINT lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
+#define DPF D3DXDebugPrintf
+#else
+#define DPF
+#endif
 
 #include "d3dxGlobal.h"
 

@@ -343,19 +343,19 @@ DECLARE_INTERFACE_(ID3DX11EffectScalarVariable, ID3DX11EffectVariable)
     // ID3DX11EffectVariable
 
     // ID3DX11EffectScalarVariable
-    STDMETHOD(SetFloat)(THIS_ _In_ const float Value) PURE;
+    STDMETHOD(SetFloat)(THIS_ _In_ float Value) PURE;
     STDMETHOD(GetFloat)(THIS_ _Out_ float *pValue) PURE;    
     
     STDMETHOD(SetFloatArray)(THIS_ _In_reads_(Count) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     STDMETHOD(GetFloatArray)(THIS_ _Out_writes_(Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     
-    STDMETHOD(SetInt)(THIS_ _In_ const int Value) PURE;
+    STDMETHOD(SetInt)(THIS_ _In_ int Value) PURE;
     STDMETHOD(GetInt)(THIS_ _Out_ int *pValue) PURE;
     
     STDMETHOD(SetIntArray)(THIS_ _In_reads_(Count) const int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     STDMETHOD(GetIntArray)(THIS_ _Out_writes_(Count) int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;
     
-    STDMETHOD(SetBool)(THIS_ _In_ const bool Value) PURE;
+    STDMETHOD(SetBool)(THIS_ _In_ bool Value) PURE;
     STDMETHOD(GetBool)(THIS_ _Out_ bool *pValue) PURE;
     
     STDMETHOD(SetBoolArray)(THIS_ _In_reads_(Count) const bool *pData, _In_ uint32_t Offset, _In_ uint32_t Count) PURE;

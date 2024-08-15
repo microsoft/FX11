@@ -14,13 +14,6 @@
 #include "EffectBinaryFormat.h"
 #include "IUnknownImp.h"
 
-#ifdef _DEBUG
-extern void __cdecl D3DXDebugPrintf(UINT lvl, _In_z_ _Printf_format_string_ LPCSTR szFormat, ...);
-#define DPF D3DXDebugPrintf
-#else
-#define DPF
-#endif
-
 #pragma warning(push)
 #pragma warning(disable : 4481)
 // VS 2010 considers 'override' to be a extension, but it's part of C++11 as of VS 2012

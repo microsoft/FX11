@@ -127,7 +127,7 @@ struct SEffectInvalidScalarVariable : public TEffectInvalidVariable<ID3DX11Effec
 {
 public:
 
-    STDMETHOD(SetFloat)(_In_ const float Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
+    STDMETHOD(SetFloat)(_In_ float Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
     STDMETHOD(GetFloat)(_Out_ float *pValue) override { UNREFERENCED_PARAMETER(pValue); return E_FAIL; }
 
     STDMETHOD(SetFloatArray)(_In_reads_(Count) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override
@@ -135,7 +135,7 @@ public:
     STDMETHOD(GetFloatArray)(_Out_writes_(Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override
         { UNREFERENCED_PARAMETER(pData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
 
-    STDMETHOD(SetInt)(_In_ const int Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
+    STDMETHOD(SetInt)(_In_ int Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
     STDMETHOD(GetInt)(_Out_ int *pValue) override { UNREFERENCED_PARAMETER(pValue); return E_FAIL; }
 
     STDMETHOD(SetIntArray)(_In_reads_(Count) const int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override
@@ -143,7 +143,7 @@ public:
     STDMETHOD(GetIntArray)(_Out_writes_(Count) int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override
         { UNREFERENCED_PARAMETER(pData); UNREFERENCED_PARAMETER(Offset); UNREFERENCED_PARAMETER(Count); return E_FAIL; }
 
-    STDMETHOD(SetBool)(_In_ const bool Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
+    STDMETHOD(SetBool)(_In_ bool Value) override { UNREFERENCED_PARAMETER(Value); return E_FAIL; }
     STDMETHOD(GetBool)(_Out_ bool *pValue) override { UNREFERENCED_PARAMETER(pValue); return E_FAIL; }
 
     STDMETHOD(SetBoolArray)(_In_reads_(Count) const bool *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override
@@ -826,7 +826,7 @@ struct TVariable : public IBaseInterface
     {
         SVariable *pMember;
         UDataPointer dataPtr;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
+        auto pTopLevelEntity2 = GetTopLevelEntity();
 
         if (((ID3DX11Effect*)pTopLevelEntity2->pEffect)->IsOptimized())
         {
@@ -854,7 +854,7 @@ struct TVariable : public IBaseInterface
         SVariable *pMember;
         UDataPointer dataPtr;
         uint32_t index;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
+        auto pTopLevelEntity2 = GetTopLevelEntity();
 
         if (pTopLevelEntity2->pEffect->IsOptimized())
         {
@@ -883,7 +883,7 @@ struct TVariable : public IBaseInterface
         SVariable *pMember;
         UDataPointer dataPtr;
         uint32_t index;
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
+        auto pTopLevelEntity2 = GetTopLevelEntity();
 
         if (pTopLevelEntity2->pEffect->IsOptimized())
         {
@@ -910,7 +910,7 @@ struct TVariable : public IBaseInterface
     STDMETHOD_(ID3DX11EffectVariable*, GetElement)(_In_ uint32_t Index)
     {
         static LPCSTR pFuncName = "ID3DX11EffectVariable::GetElement";
-        TTopLevelVariable<ID3DX11EffectVariable> *pTopLevelEntity2 = GetTopLevelEntity();
+        auto pTopLevelEntity2 = GetTopLevelEntity();
         UDataPointer dataPtr;
 
         if (pTopLevelEntity2->pEffect->IsOptimized())
@@ -1557,19 +1557,19 @@ lExit:
 template<typename IBaseInterface, bool IsAnnotation>
 struct TFloatScalarVariable : public TNumericVariable<IBaseInterface, IsAnnotation>
 {
-    STDMETHOD(SetFloat)(_In_ const float Value) override;
+    STDMETHOD(SetFloat)(_In_ float Value) override;
     STDMETHOD(GetFloat)(_Out_ float *pValue) override;
 
     STDMETHOD(SetFloatArray)(_In_reads_(Count) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetFloatArray)(_Out_writes_(Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetInt)(_In_ const int Value) override;
+    STDMETHOD(SetInt)(_In_ int Value) override;
     STDMETHOD(GetInt)(_Out_ int *pValue) override;
 
     STDMETHOD(SetIntArray)(_In_reads_(Count) const int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetIntArray)(_Out_writes_(Count) int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetBool)(_In_ const bool Value) override;
+    STDMETHOD(SetBool)(_In_ bool Value) override;
     STDMETHOD(GetBool)(_Out_ bool *pValue) override;
 
     STDMETHOD(SetBoolArray)(_In_reads_(Count) const bool *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
@@ -1614,7 +1614,7 @@ HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::GetFloatArray(float 
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::SetInt(const int Value)
+HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::SetInt(int Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetInt";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
@@ -1650,7 +1650,7 @@ HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::GetIntArray(int *pDa
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::SetBool(const bool Value)
+HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::SetBool(bool Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetBool";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
@@ -1691,19 +1691,19 @@ HRESULT TFloatScalarVariable<IBaseInterface, IsAnnotation>::GetBoolArray(bool *p
 template<typename IBaseInterface, bool IsAnnotation>
 struct TIntScalarVariable : public TNumericVariable<IBaseInterface, IsAnnotation>
 {
-    STDMETHOD(SetFloat)(_In_ const float Value) override;
+    STDMETHOD(SetFloat)(_In_ float Value) override;
     STDMETHOD(GetFloat)(_Out_ float *pValue) override;
 
     STDMETHOD(SetFloatArray)(_In_reads_(Count) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetFloatArray)(_Out_writes_(Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetInt)(_In_ const int Value) override;
+    STDMETHOD(SetInt)(_In_ int Value) override;
     STDMETHOD(GetInt)(_Out_ int *pValue) override;
 
     STDMETHOD(SetIntArray)(_In_reads_(Count) const int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetIntArray)(_Out_writes_(Count) int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetBool)(_In_ const bool Value) override;
+    STDMETHOD(SetBool)(_In_ bool Value) override;
     STDMETHOD(GetBool)(_Out_ bool *pValue) override;
 
     STDMETHOD(SetBoolArray)(_In_reads_(Count) const bool *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
@@ -1748,7 +1748,7 @@ HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::GetFloatArray(float *p
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::SetInt(const int Value)
+HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::SetInt(int Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetInt";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
@@ -1784,7 +1784,7 @@ HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::GetIntArray(int *pData
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::SetBool(const bool Value)
+HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::SetBool(bool Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetBool";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
@@ -1825,19 +1825,19 @@ HRESULT TIntScalarVariable<IBaseInterface, IsAnnotation>::GetBoolArray(bool *pDa
 template<typename IBaseInterface, bool IsAnnotation>
 struct TBoolScalarVariable : public TNumericVariable<IBaseInterface, IsAnnotation>
 {
-    STDMETHOD(SetFloat)(_In_ const float Value) override;
+    STDMETHOD(SetFloat)(_In_ float Value) override;
     STDMETHOD(GetFloat)(_Out_ float *pValue) override;
 
     STDMETHOD(SetFloatArray)(_In_reads_(Count) const float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetFloatArray)(_Out_writes_(Count) float *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetInt)(_In_ const int Value) override;
+    STDMETHOD(SetInt)(_In_ int Value) override;
     STDMETHOD(GetInt)(_Out_ int *pValue) override;
 
     STDMETHOD(SetIntArray)(_In_reads_(Count) const int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
     STDMETHOD(GetIntArray)(_Out_writes_(Count) int *pData, _In_ uint32_t Offset, _In_ uint32_t Count) override;
 
-    STDMETHOD(SetBool)(_In_ const bool Value) override;
+    STDMETHOD(SetBool)(_In_ bool Value) override;
     STDMETHOD(GetBool)(_Out_ bool *pValue) override;
 
     STDMETHOD(SetBoolArray)(_In_reads_(Count) const bool *pData, uint32_t Offset, _In_ uint32_t Count) override;
@@ -1882,7 +1882,7 @@ HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::GetFloatArray(float *
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::SetInt(const int Value)
+HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::SetInt(int Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetInt";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
@@ -1918,7 +1918,7 @@ HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::GetIntArray(int *pDat
 
 template<typename IBaseInterface, bool IsAnnotation>
 _Use_decl_annotations_
-HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::SetBool(const bool Value)
+HRESULT TBoolScalarVariable<IBaseInterface, IsAnnotation>::SetBool(bool Value)
 {
     static LPCSTR pFuncName = "ID3DX11EffectScalarVariable::SetBool";
     if (IsAnnotation) return AnnotationInvalidSetCall(pFuncName);
