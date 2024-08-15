@@ -4,6 +4,12 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ## Release History
 
+### August 14, 2024 (11.30)
+* Minor code cleanup
+* Retired ARM (32-bit) support for the UWP platform
+* CMake project updates, refactor, and added ARM64EC support
+* Added GitHub Action Pipeline YAML files
+
 ### June 13, 2023
 * CMake project updates
 
@@ -55,11 +61,11 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 * VS 2017 updated for Windows 10 Fall Creators Update SDK (16299)
 
 ### October 13, 2017 (11.20)
-* Updated for VS 2017 update 15.1 - 15.3 and Windows 10 SDK (15063)    
+* Updated for VS 2017 update 15.1 - 15.3 and Windows 10 SDK (15063)
 
 ### March 10, 2017 (11.19)
 * Add VS 2017 projects
-* Minor code cleanup    
+* Minor code cleanup
 
 ### September 15, 2016 (11.18)
 * Minor code cleanup
