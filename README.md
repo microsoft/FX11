@@ -71,4 +71,4 @@ The Effects library for Direct3D 11 (FX11) is the work of Ian McIntyre based on 
 * Direct3D Tutorial 11-14
 * BasicHLSLFX11, DynamicShaderLinkageFX11, FixedFuncEMUFX11, InstancingFX11
 
-These are hosted on [GitHub](https://github.com/walbourn/directx-sdk-samples)
+These are hosted on [GitHub](https://github.com/microsoft/DirectX-SDK-Samples)
