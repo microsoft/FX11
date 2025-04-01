@@ -13,8 +13,8 @@ on:
     paths-ignore:
       - '*.md'
       - LICENSE
+      - '.azuredevops/*'
       - '.nuget/*'
-      - build/*.yml
 
 permissions:
   contents: read

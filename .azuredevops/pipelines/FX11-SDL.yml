@@ -21,7 +21,7 @@ pr:
     - main
   paths:
     include:
-    - build/FX11-SDL.yml
+    - '.azuredevops/pipelines/FX11-SDL.yml'
 
 resources:
   repositories:

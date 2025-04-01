@@ -20,7 +20,7 @@ pr:
     - main
   paths:
     include:
-    - build/FX11-GitHub.yml
+    - '.azuredevops/pipelines/FX11-GitHub.yml'
 
 resources:
   repositories:

@@ -516,7 +516,7 @@ ID3DX11EffectVariable * GetAnnotationByNameHelper(_In_z_ const char *pClassName,
 template<typename SVarType>
 _Success_(return)
 bool GetVariableByIndexHelper(_In_ uint32_t Index, _In_ uint32_t  VariableCount, _In_reads_(VariableCount) SVarType *pVariables, 
-                              _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_ void **ppDataPtr)
+                              _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_result_maybenull_ void **ppDataPtr)
 {
     static LPCSTR pFuncName = "ID3DX11EffectVariable::GetMemberByIndex";
 
@@ -527,14 +527,14 @@ bool GetVariableByIndexHelper(_In_ uint32_t Index, _In_ uint32_t  VariableCount,
     }
 
     *ppMember = pVariables + Index;
-    *ppDataPtr = pBaseAddress + (*ppMember)->Data.Offset;
+    *ppDataPtr = (pBaseAddress) ? (pBaseAddress + (*ppMember)->Data.Offset) : nullptr;
     return true;
 }
 
 template<typename SVarType>
 _Success_(return)
 bool GetVariableByNameHelper(_In_z_ LPCSTR Name, _In_ uint32_t  VariableCount, _In_reads_(VariableCount) SVarType *pVariables, 
-                             _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_ void **ppDataPtr, _Out_ uint32_t* pIndex)
+                             _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_result_maybenull_ void **ppDataPtr, _Out_ uint32_t* pIndex)
 {
     static LPCSTR pFuncName = "ID3DX11EffectVariable::GetMemberByName";
 
@@ -553,7 +553,7 @@ bool GetVariableByNameHelper(_In_z_ LPCSTR Name, _In_ uint32_t  VariableCount, _
         _Analysis_assume_((*ppMember)->pName != 0);
         if (strcmp((*ppMember)->pName, Name) == 0)
         {
-            *ppDataPtr = pBaseAddress + (*ppMember)->Data.Offset;
+            *ppDataPtr = (pBaseAddress) ? (pBaseAddress + (*ppMember)->Data.Offset) : nullptr;
             *pIndex = i;
             return true;
         }
@@ -585,7 +585,7 @@ bool GetVariableByNameHelper(_In_z_ LPCSTR Name, _In_ uint32_t  VariableCount, _
 template<typename SVarType>
 _Success_(return)
 bool GetVariableBySemanticHelper(_In_z_ LPCSTR Semantic, _In_ uint32_t  VariableCount, _In_reads_(VariableCount) SVarType *pVariables, 
-                                 _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_ void **ppDataPtr, _Out_ uint32_t* pIndex)
+                                 _In_opt_ uint8_t *pBaseAddress, _Outptr_ SVarType **ppMember, _Outptr_result_maybenull_ void **ppDataPtr, _Out_ uint32_t* pIndex)
 {
     static LPCSTR pFuncName = "ID3DX11EffectVariable::GetMemberBySemantic";
 
@@ -601,7 +601,7 @@ bool GetVariableBySemanticHelper(_In_z_ LPCSTR Semantic, _In_ uint32_t  Variable
         if (nullptr != (*ppMember)->pSemantic &&
             _stricmp((*ppMember)->pSemantic, Semantic) == 0)
         {
-            *ppDataPtr = pBaseAddress + (*ppMember)->Data.Offset;
+            *ppDataPtr = (pBaseAddress) ? (pBaseAddress + (*ppMember)->Data.Offset) : nullptr;
             *pIndex = i;
             return true;
         }
