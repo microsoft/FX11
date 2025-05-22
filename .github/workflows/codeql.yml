@@ -8,12 +8,17 @@ name: "CodeQL"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '*.md'
+      - LICENSE
+      - '.azuredevops/**'
+      - '.nuget/*'
   pull_request:
     branches: [ "main" ]
     paths-ignore:
       - '*.md'
       - LICENSE
-      - '.azuredevops/*'
+      - '.azuredevops/**'
       - '.nuget/*'
   schedule:
     - cron: '21 22 * * 6'
