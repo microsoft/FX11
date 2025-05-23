@@ -38,73 +38,51 @@ pool:
 
 jobs:
 - job: DESKTOP_BUILD
-  displayName: 'Win32 Desktop'
+  displayName: 'Windows Desktop'
   timeoutInMinutes: 60
+  strategy:
+    maxParallel: 4
+    matrix:
+      Release_x64:
+        BuildPlatform: x64
+        BuildConfiguration: Release
+        SpectreMitigation: false
+      Debug_x64:
+        BuildPlatform: x64
+        BuildConfiguration: Debug
+        SpectreMitigation: false
+      Release_x86:
+        BuildPlatform: Win32
+        BuildConfiguration: Release
+        SpectreMitigation: false
+      Debug_x86:
+        BuildPlatform: Win32
+        BuildConfiguration: Debug
+        SpectreMitigation: false
+      Release_x64_SpectreMitigated:
+        BuildPlatform: x64
+        BuildConfiguration: Release
+        SpectreMitigation: 'Spectre'
+      Debug_x64_SpectreMitigated:
+        BuildPlatform: x64
+        BuildConfiguration: Debug
+        SpectreMitigation: 'Spectre'
+      Release_x86_SpectreMitigated:
+        BuildPlatform: Win32
+        BuildConfiguration: Release
+        SpectreMitigation: 'Spectre'
+      Debug_x86_SpectreMitigated:
+        BuildPlatform: Win32
+        BuildConfiguration: Debug
+        SpectreMitigation: 'Spectre'
   steps:
   - checkout: self
     clean: true
     fetchTags: false
   - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 32dbg
+    displayName: Build solution Effects11_2019_Win10.sln
     inputs:
       solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64
-      platform: Win32
-      configuration: Debug
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 32rel
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64
-      platform: Win32
-      configuration: Release
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 64dbg
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64
-      platform: x64
-      configuration: Debug
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 64rel
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64
-      platform: x64
-      configuration: Release
-
-- job: DESKTOP_BUILD_SPECTRE
-  displayName: 'Win32 Desktop (Spectre-mitigated)'
-  timeoutInMinutes: 60
-  steps:
-  - checkout: self
-    clean: true
-    fetchTags: false
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 32dbg
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
-      platform: Win32
-      configuration: Debug
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 32rel
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
-      platform: Win32
-      configuration: Release
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 64dbg
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
-      platform: x64
-      configuration: Debug
-  - task: VSBuild@1
-    displayName: Build solution Effects11_2019_Win10.sln 64rel
-    inputs:
-      solution: Effects11_2019_Win10.sln
-      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=Spectre
-      platform: x64
-      configuration: Release
+      msbuildArgs: /p:PreferredToolArchitecture=x64 /p:SpectreMitigation=$(SpectreMitigation)
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
