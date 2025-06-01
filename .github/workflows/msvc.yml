@@ -7,14 +7,14 @@ name: Microsoft C++ Code Analysis
 
 on:
   push:
-    branches: [ "main" ]
+    branches: "main"
     paths-ignore:
       - '*.md'
       - '.azuredevops/**'
       - LICENSE
       - '.nuget/*'
   pull_request:
-    branches: [ "main" ]
+    branches: "main"
     paths-ignore:
       - '*.md'
       - '.azuredevops/**'
