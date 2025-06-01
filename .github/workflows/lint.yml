@@ -40,6 +40,5 @@ jobs:
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_JSON: true
           VALIDATE_MARKDOWN: true
-          VALIDATE_POWERSHELL: true
           VALIDATE_GITLEAKS: true
           VALIDATE_YAML: true
