@@ -1,0 +1,10 @@
+{
+    "Format": "github-actions",
+    "exclude": [
+        ".git",
+        "LICENSE"
+    ],
+    "Disable": {
+        "Indentation": false
+    }
+}

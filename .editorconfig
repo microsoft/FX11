@@ -1,6 +1,6 @@
 root = true
 
-[*.{cpp,h}]
+[*.{cpp,h,inl}]
 indent_size = 4
 indent_style = space
 trim_trailing_whitespace = true
