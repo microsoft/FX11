@@ -5,7 +5,7 @@
         "LICENSE"
     ],
     "Disable": {
-        "Indentation": false,
-        "IndentSize": false
+        "Indentation": true,
+        "IndentSize": true
     }
 }
