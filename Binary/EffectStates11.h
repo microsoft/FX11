@@ -185,7 +185,7 @@ const LValue g_lvGeneral[] =
     { "ScissorEnable",              EBT_Rasterizer,     D3D_SVT_BOOL,               1, 1, false, g_rvBOOL,                ELHS_ScissorEnable,             offsetof_fx(SRasterizerBlock, BackingStore.ScissorEnable),                     0 },
     { "MultisampleEnable",          EBT_Rasterizer,     D3D_SVT_BOOL,               1, 1, false, g_rvBOOL,                ELHS_MultisampleEnable,         offsetof_fx(SRasterizerBlock, BackingStore.MultisampleEnable),                 0 },
     { "AntialiasedLineEnable",      EBT_Rasterizer,     D3D_SVT_BOOL,               1, 1, false, g_rvBOOL,                ELHS_AntialiasedLineEnable,     offsetof_fx(SRasterizerBlock, BackingStore.AntialiasedLineEnable),             0 },
-    
+
     { "DepthEnable",                EBT_DepthStencil,   D3D_SVT_BOOL,               1, 1, false, g_rvBOOL,                ELHS_DepthEnable,               offsetof_fx(SDepthStencilBlock, BackingStore.DepthEnable),                     0 },
     { "DepthWriteMask",             EBT_DepthStencil,   D3D_SVT_UINT,               1, 1, false, g_rvDEPTH_WRITE_MASK,    ELHS_DepthWriteMask,            offsetof_fx(SDepthStencilBlock, BackingStore.DepthWriteMask),                  0 },
     { "DepthFunc",                  EBT_DepthStencil,   D3D_SVT_UINT,               1, 1, false, g_rvCMP,                 ELHS_DepthFunc,                 offsetof_fx(SDepthStencilBlock, BackingStore.DepthFunc),                       0 },
@@ -223,7 +223,7 @@ const LValue g_lvGeneral[] =
     { "MaxLOD",                     EBT_Sampler,        D3D_SVT_FLOAT,              1, 1, false, nullptr,                 ELHS_MaxLOD,                    offsetof_fx(SSamplerBlock, BackingStore.SamplerDesc.MaxLOD),                   0 },
     { "Texture",                    EBT_Sampler,        D3D_SVT_TEXTURE,            1, 1, false, g_rvNULL,                ELHS_Texture,                   offsetof_fx(SSamplerBlock, BackingStore.pTexture),                             0 },
 
-    // D3D11 
+    // D3D11
     { "HullShader",                 EBT_Pass,           D3D11_SVT_HULLSHADER,         1, 1, false, g_rvNULL,              ELHS_HullShaderBlock,           offsetof_fx(SPassBlock, BackingStore.pHullShaderBlock),                       0 },
     { "DomainShader",               EBT_Pass,           D3D11_SVT_DOMAINSHADER,       1, 1, false, g_rvNULL,              ELHS_DomainShaderBlock,         offsetof_fx(SPassBlock, BackingStore.pDomainShaderBlock),                       0 },
     { "ComputeShader",              EBT_Pass,           D3D11_SVT_COMPUTESHADER,      1, 1, false, g_rvNULL,              ELHS_ComputeShaderBlock,        offsetof_fx(SPassBlock, BackingStore.pComputeShaderBlock),                       0 },

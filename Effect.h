@@ -65,11 +65,11 @@ typedef size_t Timer;
 //////////////////////////////////////////////////////////////////////////
 
 // CEffectMatrix is used internally instead of float arrays
-struct CEffectMatrix 
+struct CEffectMatrix
 {
-    union 
+    union
     {
-        struct 
+        struct
         {
             float        _11, _12, _13, _14;
             float        _21, _22, _23, _24;
@@ -81,7 +81,7 @@ struct CEffectMatrix
     };
 };
 
-struct CEffectVector4 
+struct CEffectVector4
 {
     float x;
     float y;
@@ -92,7 +92,7 @@ struct CEffectVector4
 union UDataPointer
 {
     void                    *pGeneric;
-    uint8_t                 *pNumeric; 
+    uint8_t                 *pNumeric;
     float                   *pNumericFloat;
     uint32_t                *pNumericDword;
     int                     *pNumericInt;
@@ -142,14 +142,14 @@ struct SMemberDataPointer
 };
 
 struct SType : public ID3DX11EffectType
-{   
+{
     static const UINT_PTR c_InvalidIndex = (uint32_t) -1;
     static const uint32_t c_ScalarSize = sizeof(uint32_t);
 
     // packing rule constants
     static const uint32_t c_ScalarsPerRegister = 4;
-    static const uint32_t c_RegisterSize = c_ScalarsPerRegister * c_ScalarSize; // must be a power of 2!!    
-    
+    static const uint32_t c_RegisterSize = c_ScalarsPerRegister * c_ScalarSize; // must be a power of 2!!
+
     EVarType    VarType;        // numeric, object, struct
     uint32_t    Elements;       // # of array elements (0 for non-arrays)
     char        *pTypeName;     // friendly name of the type: "VS_OUTPUT", "float4", etc.
@@ -171,12 +171,12 @@ struct SType : public ID3DX11EffectType
 
     uint32_t    Stride;         // Number of bytes to advance between elements.
                                 // Typically a multiple of 16 for arrays, vectors, matrices.
-                                // For scalars and small vectors/matrices, this can be 4 or 8.    
+                                // For scalars and small vectors/matrices, this can be 4 or 8.
 
     uint32_t    PackedSize;     // Size, in bytes, of this data typed when fully packed
 
     union
-    {        
+    {
         SBinaryNumericType  NumericType;
         EObjectType         ObjectType;         // not all values of EObjectType are valid here (e.g. constant buffer)
         struct
@@ -205,7 +205,7 @@ struct SType : public ID3DX11EffectType
     }
 
     bool IsEqual(SType *pOtherType) const;
-    
+
     bool IsObjectType(EObjectType ObjType) const
     {
         return IsObjectTypeHelper(VarType, ObjectType, ObjType);
@@ -251,8 +251,8 @@ struct SType : public ID3DX11EffectType
         return IsDepthStencilViewHelper(VarType, ObjectType);
     }
 
-    uint32_t GetTotalUnpackedSize(_In_ bool IsSingleElement) const; 
-    uint32_t GetTotalPackedSize(_In_ bool IsSingleElement) const; 
+    uint32_t GetTotalUnpackedSize(_In_ bool IsSingleElement) const;
+    uint32_t GetTotalPackedSize(_In_ bool IsSingleElement) const;
     HRESULT GetDescHelper(_Out_ D3DX11_EFFECT_TYPE_DESC *pDesc, _In_ bool IsSingleElement) const;
 
     STDMETHOD_(bool, IsValid)() override { return true; }
@@ -458,7 +458,7 @@ struct SPassBlock : SBaseBlock, public ID3DX11EffectPass
     STDMETHOD_(ID3DX11EffectVariable*, GetAnnotationByName)(_In_z_ LPCSTR Name) override;
 
     STDMETHOD(Apply)(_In_ uint32_t Flags, _In_ ID3D11DeviceContext* pContext) override;
-    
+
     STDMETHOD(ComputeStateBlockMask)(_Inout_ D3DX11_STATE_BLOCK_MASK *pStateBlockMask) override;
 
     IUNKNOWN_IMP(SPassBlock, ID3DX11EffectPass, IUnknown);
@@ -619,7 +619,7 @@ struct SShaderBlock
     };
 
     bool                            IsValid;
-    SD3DShaderVTable                *pVT;                
+    SD3DShaderVTable                *pVT;
 
     // This value is nullptr if the shader is nullptr or was never initialized
     SReflectionData                 *pReflectionData;
@@ -644,7 +644,7 @@ struct SShaderBlock
     uint32_t                        TBufferDepCount;
     SConstantBuffer                 **ppTbufDeps;
 
-    ID3DBlob                        *pInputSignatureBlob;   // The input signature is separated from the bytecode because it 
+    ID3DBlob                        *pInputSignatureBlob;   // The input signature is separated from the bytecode because it
                                                             // is always available, even after Optimize() has been called.
 
     SShaderBlock(SD3DShaderVTable *pVirtualTable = nullptr) noexcept;
@@ -807,7 +807,7 @@ struct SConstantBuffer : public TUncastableVariable<ID3DX11EffectConstantBuffer>
     SGlobalVariable         *pVariables;        // array of size [VariableCount], points into effect's contiguous variable list
     uint32_t                ExplicitBindPoint;  // Used when a CB has been explicitly bound (register(bXX)). -1 if not
 
-    bool                    IsDirty:1;          // Set when any member is updated; cleared on CB apply    
+    bool                    IsDirty:1;          // Set when any member is updated; cleared on CB apply
     bool                    IsTBuffer:1;        // true iff TBuffer.pShaderResource != nullptr
     bool                    IsUserManaged:1;    // Set if you don't want effects to update this buffer
     bool                    IsEffectOptimized:1;// Set if the effect has been optimized
@@ -901,8 +901,8 @@ struct SConstantBuffer : public TUncastableVariable<ID3DX11EffectConstantBuffer>
 enum ERuntimeAssignmentType
 {
     ERAT_Invalid,
-    // [Destination] refers to the destination location, which is always the backing store of the pass/state block. 
-    // [Source] refers to the current source of data, always coming from either a constant buffer's 
+    // [Destination] refers to the destination location, which is always the backing store of the pass/state block.
+    // [Source] refers to the current source of data, always coming from either a constant buffer's
     //  backing store (for numeric assignments), an object variable's block array, or an anonymous (unowned) block
 
     // Numeric variables:
@@ -943,7 +943,7 @@ struct SAssignment
 
     // The value of SAssignment.AssignmentType determines how the other fields behave
     // (DependencyCount, pDependencies, Destination, and Source)
-    ERuntimeAssignmentType  AssignmentType;      
+    ERuntimeAssignmentType  AssignmentType;
 
     Timer                   LastRecomputedTime;
 
@@ -999,7 +999,7 @@ struct SPointerMapping
 
     uint32_t Hash()
     {
-        // hash the pointer itself 
+        // hash the pointer itself
         // (using the pointer as a hash would be very bad)
         return ComputeHash((uint8_t*)&pOld, sizeof(pOld));
     }
@@ -1023,12 +1023,12 @@ public:
     uint32_t GetSize();
     uint8_t* GetDataStart() { return m_pData; }
 
-    // AddData and AddString append existing data to the buffer - they change m_dwSize. Users are 
+    // AddData and AddString append existing data to the buffer - they change m_dwSize. Users are
     //   not expected to modify the data pointed to by the return pointer
     HRESULT AddString(_In_z_ const char *pString, _Outptr_result_z_ char **ppPointer);
     HRESULT AddData(_In_reads_(dwSize) const void *pData, _In_ uint32_t dwSize, _Outptr_ void **ppPointer);
 
-    // Allocate behaves like a standard new - it will allocate memory, move m_dwSize. The caller is 
+    // Allocate behaves like a standard new - it will allocate memory, move m_dwSize. The caller is
     //   expected to use the returned pointer
     void* Allocate(uint32_t dwSize);
 
@@ -1063,7 +1063,7 @@ class CEffect : public ID3DX11Effect
     friend struct SConstantBuffer;
     friend struct TSamplerVariable<TGlobalVariable<ID3DX11EffectSamplerVariable>>;
     friend struct TSamplerVariable<TVariable<TMember<ID3DX11EffectSamplerVariable>>>;
-    
+
 protected:
 
     uint32_t                m_RefCount;
@@ -1128,10 +1128,10 @@ protected:
     SRenderTargetView       *m_pRenderTargetViews;
 
     uint32_t                m_DepthStencilViewCount;
-    SDepthStencilView       *m_pDepthStencilViews; 
+    SDepthStencilView       *m_pDepthStencilViews;
 
     Timer                   m_LocalTimer;
-    
+
     // temporary index variable for assignment evaluation
     uint32_t                m_FXLIndex;
 
@@ -1143,7 +1143,7 @@ protected:
     CEffectVectorOwner<SSingleElementType> m_pTypeInterfaces;
     CEffectVectorOwner<SMember>            m_pMemberInterfaces;
 
-    //////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////
     // String & Type pooling
 
     typedef SType *LPSRUNTIMETYPE;
@@ -1169,9 +1169,9 @@ protected:
     HRESULT OptimizeTypes(_Inout_ CPointerMappingTable *pMappingTable, _In_ bool Cloning = false);
 
 
-    //////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////
     // Runtime (performance critical)
-    
+
     void ApplyShaderBlock(_In_ SShaderBlock *pBlock);
     bool ApplyRenderStateBlock(_In_ SBaseBlock *pBlock);
     bool ApplySamplerBlock(_In_ SSamplerBlock *pBlock);
@@ -1179,9 +1179,9 @@ protected:
     bool EvaluateAssignment(_Inout_  SAssignment *pAssignment);
     bool ValidateShaderBlock(_Inout_ SShaderBlock* pBlock );
     bool ValidatePassBlock(_Inout_ SPassBlock* pBlock );
-    
-    //////////////////////////////////////////////////////////////////////////    
-    // Non-runtime functions (not performance critical)    
+
+    //////////////////////////////////////////////////////////////////////////
+    // Non-runtime functions (not performance critical)
 
     SGlobalVariable *FindLocalVariableByName(_In_z_ LPCSTR pVarName);      // Looks in the current effect only
     SGlobalVariable *FindVariableByName(_In_z_ LPCSTR pVarName);
@@ -1199,7 +1199,7 @@ protected:
 
     void ValidateIndex(_In_ uint32_t Elements);
 
-    void IncrementTimer();    
+    void IncrementTimer();
     void HandleLocalTimerRollover();
 
     friend struct SConstantBuffer;
@@ -1216,11 +1216,11 @@ public:
     HRESULT BindToDevice(_In_ ID3D11Device *pDevice, _In_z_ LPCSTR srcName );
 
     Timer GetCurrentTime() const { return m_LocalTimer; }
-    
+
     bool IsReflectionData(void *pData) const { return m_pReflection->m_Heap.IsInHeap(pData); }
     bool IsRuntimeData(void *pData) const { return m_Heap.IsInHeap(pData); }
 
-    //////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////
     // Public interface
 
     // IUnknown
@@ -1231,7 +1231,7 @@ public:
     // ID3DX11Effect
     STDMETHOD_(bool, IsValid)() override { return true; }
 
-    STDMETHOD(GetDevice)(_Outptr_ ID3D11Device** ppDevice) override;    
+    STDMETHOD(GetDevice)(_Outptr_ ID3D11Device** ppDevice) override;
 
     STDMETHOD(GetDesc)(_Out_ D3DX11_EFFECT_DESC *pDesc) override;
 
@@ -1254,7 +1254,7 @@ public:
     STDMETHOD(Optimize)() override;
     STDMETHOD_(bool, IsOptimized)() override;
 
-    //////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////
     // New reflection helpers
 
     ID3DX11EffectType * CreatePooledSingleElementTypeInterface(_In_ SType *pType);

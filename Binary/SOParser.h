@@ -16,7 +16,7 @@
 
 namespace D3DX11Effects
 {
-    
+
 //////////////////////////////////////////////////////////////////////////
 // CSOParser
 //////////////////////////////////////////////////////////////////////////
@@ -198,7 +198,7 @@ lExit:
 
         assert( pSemantic );
 
-        pSemantic = strchr( pSemantic, '.' ); 
+        pSemantic = strchr( pSemantic, '.' );
 
         if( pSemantic == nullptr )
         {
@@ -245,7 +245,7 @@ lExit:
         _Analysis_assume_( ppSemantic && *ppSemantic );
 
         HRESULT hr = S_OK;
-        LPSTR pColon = strchr( *ppSemantic, ':' ); 
+        LPSTR pColon = strchr( *ppSemantic, ':' );
 
         if( pColon == nullptr )
             return S_OK;
@@ -302,7 +302,7 @@ lExit:
         {
             m_newEntry.SemanticIndex = atoi( pSemantic + uLen );
             pSemantic[uLen] = '\0';
-        } 
+        }
         else
         {
             m_newEntry.SemanticIndex = 0;

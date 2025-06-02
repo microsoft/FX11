@@ -186,7 +186,7 @@ void CEffect::ApplyShaderBlock(_In_ SShaderBlock *pBlock)
         }
         (m_pContext->*(pVT->pSetSamplers))(pSampDep->StartIndex, pSampDep->Count, pSampDep->ppD3DObjects);
     }
- 
+
     // Set the UAVs
     // UAV ranges were combined in EffectLoad.  This code remains unchanged, however, so that ranges can be easily split
     assert( pBlock->UAVDepCount < 2 );
@@ -319,7 +319,7 @@ bool CEffect::ApplyRenderStateBlock(_In_ SBaseBlock *pBlock)
                     pDSBlock->IsValid = false;
             }
             break;
-        
+
         case EBT_Blend:
             {
                 SBlendBlock *pBBlock = pBlock->AsBlend();
@@ -352,7 +352,7 @@ bool CEffect::ApplyRenderStateBlock(_In_ SBaseBlock *pBlock)
                     pRBlock->IsValid = false;
             }
             break;
-        
+
         default:
             assert(0);
         }
@@ -375,7 +375,7 @@ bool CEffect::EvaluateAssignment(_Inout_ SAssignment *pAssignment)
 {
     bool bNeedUpdate = false;
     SGlobalVariable *pVarDep0, *pVarDep1;
-    
+
     switch (pAssignment->AssignmentType)
     {
     case ERAT_NumericVariable:
@@ -400,7 +400,7 @@ bool CEffect::EvaluateAssignment(_Inout_ SAssignment *pAssignment)
 
             // Array index variable is dirty, update the pointer
             pAssignment->Source.pNumeric = pVarDep1->Data.pNumeric + pVarDep1->pType->Stride * m_FXLIndex;
-            
+
             // Copy the new data
             memcpy(pAssignment->Destination.pNumeric, pAssignment->Source.pNumeric, pAssignment->DataSize);
             bNeedUpdate = true;
@@ -437,7 +437,7 @@ bool CEffect::EvaluateAssignment(_Inout_ SAssignment *pAssignment)
         assert(0);
         break;
     }
-    
+
     // Mark the assignment as not dirty
     pAssignment->LastRecomputedTime = m_LocalTimer;
 
@@ -504,7 +504,7 @@ bool CEffect::ValidatePassBlock( _Inout_ SPassBlock* pBlock )
     {
         if( !ValidateShaderBlock(pBlock->BackingStore.pPixelShaderBlock) )
             return false;
-        else if( pBlock->BackingStore.pPixelShaderBlock->UAVDepCount > 0 && 
+        else if( pBlock->BackingStore.pPixelShaderBlock->UAVDepCount > 0 &&
                  pBlock->BackingStore.RenderTargetViewCount > pBlock->BackingStore.pPixelShaderBlock->pUAVDeps[0].StartIndex )
         {
             return false;
@@ -660,7 +660,7 @@ void CEffect::IncrementTimer()
 void CEffect::HandleLocalTimerRollover()
 {
     uint32_t  i, j, k;
-    
+
     // step 1: update variables
     for (i = 0; i < m_VariableCount; ++ i)
     {
