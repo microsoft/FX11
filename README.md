@@ -6,7 +6,7 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-**August 14, 2024**
+# August 14, 2024
 
 Effects for Direct3D 11 (FX11) is a management runtime for authoring HLSL shaders, render state, and runtime variables together.
 
@@ -14,7 +14,7 @@ This code is designed to build with Visual Studio 2019 (16.11 or later) or Visua
 
 These components are designed to work without requiring any content from the legacy DirectX SDK. For details, see [Where is the DirectX SDK?](https://aka.ms/dxsdk).
 
-*This project is 'archived'. It is still available for use for legacy projects or when using older developer education materials, but use of it for new projects is not recommended.*
+_This project is 'archived'. It is still available for use for legacy projects or when using older developer education materials, but use of it for new projects is not recommended._
 
 ## Disclaimer
 
@@ -48,7 +48,7 @@ For a full change history, see [CHANGELOG.md](https://github.com/microsoft/FX11/
 
 ## Support
 
-For questions, consider using [Stack Overflow](https://stackoverflow.com/questions/tagged/d3dx) with the *d3dx* tag.
+For questions, consider using [Stack Overflow](https://stackoverflow.com/questions/tagged/d3dx) with the _d3dx_ tag.
 
 ## Code of Conduct
 

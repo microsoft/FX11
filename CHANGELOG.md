@@ -120,7 +120,7 @@ http://go.microsoft.com/fwlink/?LinkId=271568
 
 ### November 6, 2012 (11.04)
 * Added ``IUnknown`` as a base class for all Effects 11 interfaces to simplify use in managed interop sceanrios, although the lifetime for these objects is still based on the lifetime of the parent ID3DX11Effect object. Therefore reference counting is ignored for these interfaces.
-  + ID3DX11EffectType, ID3DX11EffectVariable and derived classes, ID3DX11EffectPass, ID3DX11EffectTechnique, and ID3DX11EffectGroup
+  * ID3DX11EffectType, ID3DX11EffectVariable and derived classes, ID3DX11EffectPass, ID3DX11EffectTechnique, and ID3DX11EffectGroup
 
 ### October 24, 2012 (11.03)
 * Removed the dependency on the D3DX11 headers, so FX11 no longer requires the legacy DirectX SDK to build.

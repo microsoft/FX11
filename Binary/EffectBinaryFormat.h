@@ -2,7 +2,7 @@
 // File: EffectBinaryFormat.h
 //
 // Direct3D11 Effects Binary Format
-// This is the binary file interface shared between the Effects 
+// This is the binary file interface shared between the Effects
 // compiler and runtime.
 //
 // Copyright (c) Microsoft Corporation.
@@ -30,7 +30,7 @@ struct EVersionTag
 };
 
 // versions must be listed in ascending order
-static const EVersionTag g_EffectVersions[] = 
+static const EVersionTag g_EffectVersions[] =
 {
     { "fx_4_0", D3DX11_FXL_VERSION(4,0),   0xFEFF1001 },
     { "fx_4_1", D3DX11_FXL_VERSION(4,1),   0xFEFF1011 },
@@ -70,7 +70,7 @@ enum ELhsType : int
 
     ELHS_GeometryShaderSO,          // When setting SO assignments, GeometryShaderSO precedes the actual GeometryShader assn
 
-    ELHS_ComputeShaderBlock,   
+    ELHS_ComputeShaderBlock,
     ELHS_HullShaderBlock,
     ELHS_DomainShaderBlock,
 
@@ -274,15 +274,15 @@ inline bool IsShaderResourceHelper(EVarType InVarType,
                                          EObjectType InObjType)
 {
     return (InVarType == EVT_Object) && ((InObjType == EOT_Texture) ||
-                                         (InObjType == EOT_Texture1D) || 
+                                         (InObjType == EOT_Texture1D) ||
                                          (InObjType == EOT_Texture1DArray) ||
-                                         (InObjType == EOT_Texture2D) || 
+                                         (InObjType == EOT_Texture2D) ||
                                          (InObjType == EOT_Texture2DArray) ||
-                                         (InObjType == EOT_Texture2DMS) || 
+                                         (InObjType == EOT_Texture2DMS) ||
                                          (InObjType == EOT_Texture2DMSArray) ||
-                                         (InObjType == EOT_Texture3D) || 
+                                         (InObjType == EOT_Texture3D) ||
                                          (InObjType == EOT_TextureCube) ||
-                                         (InObjType == EOT_TextureCubeArray) || 
+                                         (InObjType == EOT_TextureCubeArray) ||
                                          (InObjType == EOT_Buffer) ||
                                          (InObjType == EOT_StructuredBuffer) ||
                                          (InObjType == EOT_ByteAddressBuffer));
@@ -384,7 +384,7 @@ struct SBinaryHeader
 
     SVarCounts  Effect;
     SVarCounts  Pool;
-    
+
     uint32_t    cTechniques;
     uint32_t    cbUnstructured;
 
@@ -478,11 +478,11 @@ struct SBinaryObjectVariable
 
     // Initializer data:
     //
-    // The type structure pointed to by oType gives you Elements, 
+    // The type structure pointed to by oType gives you Elements,
     // VarType (must be EVT_Object), and ObjectType
     //
     // For ObjectType == EOT_Blend, EOT_DepthStencil, EOT_Rasterizer, EOT_Sampler
-    // struct 
+    // struct
     // {
     //   uint32_t  cAssignments;
     //   SBinaryAssignment Assignments[cAssignments];
@@ -522,11 +522,11 @@ struct SBinaryType
     uint32_t    oTypeName;      // Offset to friendly type name ("float4", "VS_OUTPUT")
     EVarType    VarType;        // Numeric, Object, or Struct
     uint32_t    Elements;       // # of array elements (0 for non-arrays)
-    uint32_t    TotalSize;      // Size in bytes; not necessarily Stride * Elements for arrays 
+    uint32_t    TotalSize;      // Size in bytes; not necessarily Stride * Elements for arrays
                                 // because of possible gap left in final register
     uint32_t    Stride;         // If an array, this is the spacing between elements.
                                 // For unpacked arrays, always divisible by 16-bytes (1 register).
-                                // No support for packed arrays    
+                                // No support for packed arrays
     uint32_t    PackedSize;     // Size, in bytes, of this data typed when fully packed
 
     struct SBinaryMember
@@ -540,7 +540,7 @@ struct SBinaryType
     // the data that follows depends on the VarType:
     // Numeric: SType::SNumericType
     // Object:  EObjectType
-    // Struct:  
+    // Struct:
     //   struct
     //   {
     //        uint32_t          cMembers;
@@ -625,7 +625,7 @@ struct SBinaryAssignment
     };
 
     struct SIndexedObjectExpression
-    {   
+    {
         uint32_t  oArrayName;
         uint32_t  oCode;
     };
