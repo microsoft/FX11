@@ -17,6 +17,7 @@
 *.ilk
 *.VC.db
 .vs
+.vscode
 /ipch
 Bin
 /wiki
