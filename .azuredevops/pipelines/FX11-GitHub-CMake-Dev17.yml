@@ -38,7 +38,7 @@ variables:
   Codeql.Enabled: false
   VS_GENERATOR: 'Visual Studio 17 2022'
   VC_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC'
-  WIN11_SDK: '10.0.22000.0'
+  WIN11_SDK: '10.0.26100.0'
 
 pool:
   vmImage: windows-2022
