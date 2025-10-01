@@ -44,6 +44,8 @@ FOR SECURITY ADVISORIES, see [GitHub](https://github.com/microsoft/FX11/security
 
 For a full change history, see [CHANGELOG.md](https://github.com/microsoft/FX11/blob/main/CHANGELOG.md).
 
+* The CMake projects require 3.21 or later. VS 2019 users will need to install a standalone version of CMake 3.21 or later and add it to their PATH.
+
 * The library can be built with Visual C++ or with clang/LLVM for Windows. The code is not conformant enough to support the GNUC (MinGW) compiler.
 
 ## Support
